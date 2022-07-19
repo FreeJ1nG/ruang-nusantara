@@ -3,7 +3,7 @@ import { FC, useContext, useState } from "react";
 import Image from "next/image";
 import { IndoContext } from "../../pages/IndoContext";
 import Link from "next/link";
-import Popup from "../../pages/contact/components/Popup/Popup";
+import Popup from "./components/Popup/Popup";
 import { useRouter } from "next/router";
 
 type NavbarProps = {
