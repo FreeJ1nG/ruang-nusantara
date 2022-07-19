@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from "react";
 
 import Image from "next/image";
-import { IndoContext } from "../../pages/IndoContext";
+import { IndoContext } from "../../context/IndoContext";
 import Link from "next/link";
 import Popup from "./components/Popup/Popup";
 import { useRouter } from "next/router";
