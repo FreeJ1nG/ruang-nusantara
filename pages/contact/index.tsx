@@ -2,7 +2,7 @@ import { FC, ReactNode, useContext, useState } from "react";
 
 import Button from "../../components/Button/Button";
 import Image from "next/image";
-import { IndoContext } from "../IndoContext";
+import { IndoContext } from "../../context/IndoContext";
 import TextArea from "../../components/Input/TextArea";
 import TextInput from "../../components/Input/TextInput";
 import toast from "react-hot-toast";
@@ -15,7 +15,6 @@ const Contact: FC = () => {
 	const [subject, setSubject] = useState("");
 	const [message, setMessage] = useState("");
 	const size = useWindowSize();
-	console.log(size);
 
 	return (
 		<div className="flex flex-col mx-5 sm:mx-20 lg:mx-40 2xl:mx-96 my-10 md:my-20 md:mb-32 gap-y-10 md:gap-y-20">
