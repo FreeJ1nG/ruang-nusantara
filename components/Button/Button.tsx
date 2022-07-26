@@ -13,6 +13,7 @@ type ButtonProps = {
 	disabled?: boolean | undefined;
 	mt?: number | undefined;
 	mb?: number | undefined;
+	type: "primary" | "secondary";
 };
 
 const Button: FC<ButtonProps> = ({
@@ -26,6 +27,7 @@ const Button: FC<ButtonProps> = ({
 	disabled,
 	mt,
 	mb,
+	type,
 }) => {
 	return (
 		<button
@@ -46,17 +48,25 @@ const Button: FC<ButtonProps> = ({
 			}`}
 		>
 			<div
-				className={`bg-lightBrown absolute top-0 left-0 right-0 bottom-0 rounded-3xl overflow-hidden flex flex-row`}
+				className={`${type === "primary" && "bg-lightBrown"} ${
+					type === "secondary" && "bg-white border-2 border-lightBrown/60"
+				} absolute top-0 left-0 right-0 bottom-0 rounded-3xl overflow-hidden flex flex-row`}
 			>
 				<div
-					className={`transition-all duration-500 w-0 group-hover:w-full bg-darkBrown`}
+					className={`transition-all duration-500 w-0 group-hover:w-full ${
+						type === "primary" && "bg-darkBrown"
+					} ${type === "secondary" && "bg-yellow-400"}`}
 				/>
 				<div className={`transition-all duration-500 w-full group-hover:w-0`} />
 			</div>
-			<div className="w-full flex flex-row gap-x-5 justify-center items-center">
-				{leftIcon && <div className="text-white z-40">{leftIcon}</div>}
-				<h1 className="font-bold text-white z-40">{label}</h1>
-				{rightIcon && <div className="text-white z-40">{rightIcon}</div>}
+			<div
+				className={`${type === "primary" && "text-white"} ${
+					type === "secondary" && "text-lightBrown"
+				} w-full flex flex-row gap-x-5 justify-center items-center`}
+			>
+				{leftIcon && <div className={"z-40"}>{leftIcon}</div>}
+				<h1 className="font-bold z-40">{label}</h1>
+				{rightIcon && <div className={"z-40"}>{rightIcon}</div>}
 			</div>
 		</button>
 	);
