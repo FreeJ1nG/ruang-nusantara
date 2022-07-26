@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import type { AppProps } from "next/app";
 import Footer from "../components/Footer/Footer";
@@ -16,9 +17,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<title>Ruang Nusantara</title>
 				<link rel="icon" href="/logo.png" />
 			</Head>
-			<div className="relative flex flex-col text-white">
+			<div className="relative flex flex-col text-defaultText font-poppins">
 				<Navbar indo={indo} setIndo={setIndo} />
-				<div className="h-24" />
 				<Component {...pageProps} />
 				<Footer />
 			</div>
