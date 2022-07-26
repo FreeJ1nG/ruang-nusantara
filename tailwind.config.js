@@ -6,15 +6,18 @@ module.exports = {
 	],
 	theme: {
 		extend: {
-			screens: {
-				mobile: "400px",
-			},
 			fontFamily: {
 				montserrat: ["Montserrat", "sans-serif"],
 				poppins: ["Poppins", "sans-serif"],
 				inter: ["Inter", "sans-serif"],
+				serifpro: ["Source Serif Pro", "serif"],
+				sanspro: ["Source Sans Pro", "sans-serif"],
+				ubuntu: ["Ubuntu", "sans-serif"],
 			},
 			colors: {
+				defaultText: "#41342B",
+				yellowText: "#FFD552",
+
 				brownBg: "#150F09",
 				lightBrown: "#A56831",
 				darkBrown: "#7C4930",
@@ -27,6 +30,14 @@ module.exports = {
 
 				textInputBg: "#434345",
 				whiteCover: "#D9D9D9",
+
+				selectBorder: "#575757",
+				selectedBorder: "#F8B525",
+
+				lighter: "#4B4B4B",
+				lighter2: "#50504F",
+
+				gray: "#B3B3B3",
 			},
 			zIndex: {
 				5: "5",
