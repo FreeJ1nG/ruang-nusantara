@@ -16,7 +16,7 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 	const [showMenu, setShowMenu] = useState<boolean>(false);
 
 	return (
-		<>
+		<div className="text-white">
 			<Popup showPopup={showMenu} setShowPopup={setShowMenu}>
 				<div className="w-full h-full p-10 flex flex-col gap-y-5">
 					<MenuElement
@@ -26,40 +26,34 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 						setShowMenu={setShowMenu}
 					/>
 					<MenuElement
-						where="/explore"
-						indoTitle="Jelajahi"
-						englishTitle="Explore"
+						where="/destinations"
+						indoTitle="Tujuan"
+						englishTitle="Destinations"
 						setShowMenu={setShowMenu}
 					/>
 					<MenuElement
-						where="/products"
-						indoTitle="Produk"
-						englishTitle="Products"
+						where="/trips"
+						indoTitle="Perjalanan"
+						englishTitle="Trips"
 						setShowMenu={setShowMenu}
 					/>
 					<MenuElement
-						where="/bookings"
-						indoTitle="Booking"
-						englishTitle="Booking"
-						setShowMenu={setShowMenu}
-					/>
-					<MenuElement
-						where="/contact"
-						indoTitle="Kontak"
-						englishTitle="Contact"
+						where="/shop"
+						indoTitle="Belanja"
+						englishTitle="Shop"
 						setShowMenu={setShowMenu}
 					/>
 				</div>
 			</Popup>
-			<div className="z-90 fixed w-full flex flex-row justify-between items-center px-5 md:px-10 xl:px-20 h-24 bg-black">
+			<div className="z-90 absolute top-0 left-0 right-0 flex flex-row justify-between items-center px-5 md:px-10 xl:px-20 h-24 bg-transparent">
 				<Link href="/">
 					<a className="flex flex-row items-center gap-x-2 md:gap-x-5">
 						<div className="relative w-10 h-10 md:w-14 md:h-14">
 							<Image src="/logo.png" layout="fill" alt="logo" />
 						</div>
-						<div className="flex flex-row font-bold text-md md:text-xl font-montserrat">
+						<div className="drop-shadow-2xl flex flex-row font-bold text-md md:text-xl font-montserrat">
 							Ruang
-							<div className="text-lightBrown">Nusantara</div>
+							<div className="text-lightBrown drop-shadow-2xl">Nusantara</div>
 						</div>
 					</a>
 				</Link>
@@ -83,31 +77,34 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 					</button>
 				</div>
 				<div className="hidden lg:flex flex-row items-center gap-x-5">
-					<MenuElement where="/" indoTitle="Utama" englishTitle="Home" />
 					<MenuElement
-						where="/explore"
-						indoTitle="Jelajahi"
-						englishTitle="Explore"
+						where="/"
+						indoTitle="Utama"
+						englishTitle="Home"
+						setShowMenu={setShowMenu}
 					/>
 					<MenuElement
-						where="/products"
-						indoTitle="Produk"
-						englishTitle="Products"
+						where="/destinations"
+						indoTitle="Tujuan"
+						englishTitle="Destinations"
+						setShowMenu={setShowMenu}
 					/>
 					<MenuElement
-						where="/bookings"
-						indoTitle="Booking"
-						englishTitle="Booking"
+						where="/trips"
+						indoTitle="Perjalanan"
+						englishTitle="Trips"
+						setShowMenu={setShowMenu}
 					/>
 					<MenuElement
-						where="/contact"
-						indoTitle="Kontak"
-						englishTitle="Contact"
+						where="/shop"
+						indoTitle="Belanja"
+						englishTitle="Shop"
+						setShowMenu={setShowMenu}
 					/>
 					<LanguageButton indo={indo} setIndo={setIndo} />
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 
@@ -135,7 +132,7 @@ const MenuElement: FC<MenuElementPropType> = ({
 			}}
 		>
 			<h1
-				className={`text-left lg:text-center font-poppins font-semibold text-base xl:text-xl px-5 xl:px-8 py-2 rounded-full transition-all duration-300 ${
+				className={`drop-shadow-2xl text-left lg:text-center font-poppins font-semibold text-base xl:text-lg px-4 py-1 rounded-full transition-all duration-300 ${
 					router.pathname === where ? "bg-lightBrown" : "bg-transparent"
 				}`}
 			>
@@ -155,14 +152,14 @@ const LanguageButton: FC<LanguageButtonProps> = ({ indo, setIndo }) => {
 	return (
 		<button
 			onClick={() => setIndo(!indo)}
-			className="relative w-[74px] h-[37px] lg:w-[100px] lg:h-[50px] flex flex-row justify-center items-center rounded-full bg-darkBrown"
+			className="text-white relative w-[74px] h-[37px] lg:w-[100px] lg:h-[50px] flex flex-row justify-center items-center rounded-full bg-darkBrown"
 		>
-			<div className="font-bold text-base lg:text-2xl w-1/2 z-50 flex justify-center items-center">
+			<div className="pl-1 font-bold text-base lg:text-2xl w-1/2 z-50 flex justify-center items-center">
 				ID
 			</div>
 			<div
 				onClick={() => setIndo(true)}
-				className="font-bold text-base lg:text-2xl w-1/2 z-50 flex justify-center items-center"
+				className="pr-1 font-bold text-base lg:text-2xl w-1/2 z-50 flex justify-center items-center"
 			>
 				EN
 			</div>
