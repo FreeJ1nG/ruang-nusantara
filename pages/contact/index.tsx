@@ -25,8 +25,6 @@ const Contact: FC = () => {
 				<div className="relative w-full h-[600px]">
 					<Image
 						src="/location.png"
-						width="100%"
-						height="100%"
 						layout="fill"
 						objectFit="cover"
 						alt="PJ Global School Location"
@@ -44,7 +42,7 @@ const Contact: FC = () => {
 				</div>
 				<div className="flex flex-col lg:flex-row">
 					<div className="flex justify-center">
-						<div className="flex flex-col gap-y-10 md:gap-y-20">
+						<div className="flex flex-col lg:justify-center gap-y-10 md:gap-y-20">
 							<InformationElement
 								imageSrc="/location-logo.png"
 								title="Bukit Dieng No. T-12"
@@ -71,7 +69,7 @@ const Contact: FC = () => {
 						<TextInput
 							label="Name"
 							name="Name"
-							width={(size?.width ?? 0) <= 600 ? 300 : 400}
+							width={(size?.width ?? 0) <= 600 ? 280 : 400}
 							height={50}
 							value={name}
 							setValue={setName}
@@ -79,14 +77,14 @@ const Contact: FC = () => {
 						<TextInput
 							label="E-mail Address"
 							name="email"
-							width={(size?.width ?? 0) <= 600 ? 300 : 400}
+							width={(size?.width ?? 0) <= 600 ? 280 : 400}
 							height={50}
 							value={email}
 							setValue={setEmail}
 						/>
 						<TextInput
 							label="Subject"
-							width={(size?.width ?? 0) <= 600 ? 300 : 400}
+							width={(size?.width ?? 0) <= 600 ? 280 : 400}
 							height={50}
 							value={subject}
 							setValue={setSubject}
@@ -100,6 +98,7 @@ const Contact: FC = () => {
 						/>
 						<Button
 							mt={4}
+							type="primary"
 							label="Send"
 							rightIcon={
 								<svg
