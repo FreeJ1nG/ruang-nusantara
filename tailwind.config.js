@@ -22,6 +22,8 @@ module.exports = {
 				lightBrown: "#A56831",
 				darkBrown: "#7C4930",
 				darkBrown2: "#452A0E",
+				darkBrown3: "#332821",
+				lightBrownText: "#CAAEA1",
 
 				footer: "#24262B",
 				footerText: "#BBBBBB",
@@ -36,8 +38,10 @@ module.exports = {
 
 				lighter: "#4B4B4B",
 				lighter2: "#50504F",
+				lighter3: "#969696",
 
 				gray: "#B3B3B3",
+				orange: "#F56801",
 			},
 			zIndex: {
 				5: "5",
