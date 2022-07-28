@@ -1,10 +1,11 @@
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext } from "react";
 
 import Button from "../components/Button/Button";
 import { DESTINATIONS } from "./constants";
 import Image from "next/image";
 import { IndoContext } from "../context/IndoContext";
 import type { NextPage } from "next";
+import TripsCard from "../components/TripsCard/index";
 import { useRouter } from "next/router";
 
 type PropTypes = {
@@ -18,117 +19,7 @@ const Home: NextPage = () => {
 		<div className="w-full flex flex-col">
 			<HomepageCard indo={indo} />
 			<DestinationCard indo={indo} />
-			<TripCard indo={indo} />
-		</div>
-	);
-};
-
-const TripCard: FC<PropTypes> = ({ indo }) => {
-	const router = useRouter();
-
-	return (
-		<div className="flex flex-col my-10 md:my-20 lg:my-40 mx-5 md:mx-14 lg:mx-20 gap-y-5 sm:gap-y-8 md:gap-y-20">
-			<div className="flex flex-col gap-y-2 md:gap-y-5">
-				<h1 className="font-ubuntu font-medium tracking-wide text-center md:text-left">
-					{indo ? "CERITA PERJALANAN" : "TRAVEL STORIES"}
-				</h1>
-				<div className="flex flex-col items-center md:flex-row gap-y-2 justify-between">
-					<h1 className="font-sanspro text-3xl sm:text-4xl lg:text-5xl font-black text-center md:text-left">
-						{indo
-							? "Inspirasi Perjalanan"
-							: "Get inspired from the latest stories"}
-					</h1>
-					<Button
-						label="View all trips"
-						type="secondary"
-						width={250}
-						height={35}
-						onClick={() => router.push("/trips")}
-					/>
-				</div>
-			</div>
-			<div className="flex flex-col gap-y-10 xl:flex-row gap-x-14">
-				<div className="relative w-full xl:w-3/5 h-[600px]">
-					<div className="absolute bottom-0 top-0 left-0 right-0 bg-black/10 z-50 rounded-3xl"></div>
-					<Image
-						src="/bromo.png"
-						layout="fill"
-						alt="Bromo Mountain"
-						className="rounded-3xl"
-						objectFit="cover"
-					/>
-					<div className="text-sm md:text-base absolute left-0 right-0 bottom-10 md:bottom-20 flex flex-col gap-y-5 mx-10 mr-10 md:mr-20 xl:mr-60 font-medium font-ubuntu text-white z-60">
-						<h1>Adventure</h1>
-						<h1 className="font-bold font-sanspro text-2xl lg:text-4xl">
-							The Best Hiking Routes at Bromo Tengger Semeru
-						</h1>
-						<div className="flex flex-row gap-x-5 xl:gap-x-10 items-center">
-							<h1>July 26, 2022</h1>
-							<div className="w-2 h-2 rounded-full bg-white" />
-							<h1>Baymax Disney</h1>
-						</div>
-						<h1 className="font-normal">
-							{'"'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-							do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-							enim ad minim veniam, ...
-						</h1>
-					</div>
-				</div>
-				<div className="w-full xl:w-2/5 flex flex-col gap-y-10 sm:flex-row justify-center gap-x-10">
-					<div className="text-sm md:text-base font-ubuntu w-full sm:w-1/2 lg:w-1/3 xl:w-1/2 flex flex-col gap-y-5">
-						<div className="relative w-full h-80">
-							<Image
-								objectFit="cover"
-								src="/nature_and_wildlife.png"
-								layout="fill"
-								alt="Nature and Wildlife"
-								className="rounded-full"
-							/>
-						</div>
-						<h1 className="text-lighter tracking-wide">Nature and Wildlife</h1>
-						<h1 className="font-bold font-sanspro leading-2 text-xl">
-							From the beach to the mountains: 5 Best Healing Sp...
-						</h1>
-						<div className="text-xs flex flex-row items-center gap-x-2">
-							<h1>July 22nd, 2022</h1>
-							<div className="w-1.5 h-1.5 rounded-full bg-black" />
-							<h1>Bocil NAKAL tidur</h1>
-						</div>
-						<h1 className="tracking-wide text-xs">
-							{'"'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-							do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-							enim ad minim veniam, ...
-						</h1>
-					</div>
-					<div className="text-sm md:text-base font-ubuntu w-full sm:w-1/2 lg:w-1/3 xl:w-1/2 flex flex-col gap-y-5">
-						<div className="relative w-full h-80">
-							<Image
-								objectFit="cover"
-								src="/art_culture_heritage.png"
-								layout="fill"
-								alt="Nature and Wildlife"
-								className="rounded-full"
-							/>
-						</div>
-						<h1 className="text-lighter tracking-wide">
-							Art, Culture, and Heritage
-						</h1>
-						<h1 className="font-bold font-sanspro leading-2 text-xl">
-							Make your own batik at Kampung Giriloyo, Yogyakarta
-						</h1>
-						<div className="text-xs flex flex-row items-center gap-x-2">
-							<h1>July 22nd, 2022</h1>
-							<div className="w-1.5 h-1.5 rounded-full bg-black" />
-							<h1>Ko Rew ga tidur</h1>
-						</div>
-						<h1 className="tracking-wide text-xs">
-							{'"'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-							do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-							enim ad minim veniam, ...
-						</h1>
-					</div>
-				</div>
-			</div>
+			<TripsCard />
 		</div>
 	);
 };
