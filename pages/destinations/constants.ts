@@ -1,38 +1,4 @@
-export enum Interests {
-	NATURE = "Nature and Wildlife",
-	CULINARY = "Culinary and Wellness",
-	RECREATION = "Recreation and Leisure",
-	ARTS = "Arts, Culture, and Heritage",
-}
-
-export enum Regions {
-	ALL = "All Regions",
-	BALI = "Bali",
-	JAVA = "Java",
-	KALIMANTAN = "Kalimantan",
-	SUMATERA = "Sumatera",
-	SULAWESI = "Sulawesi",
-	NUSA_TENGGARA = "Nusa Tenggara",
-	PAPUA = "Papua",
-}
-
-export const REGION_CHOICES = [
-	{ id: 0, value: Regions.ALL },
-	{ id: 1, value: Regions.BALI },
-	{ id: 2, value: Regions.JAVA },
-	{ id: 3, value: Regions.KALIMANTAN },
-	{ id: 4, value: Regions.SUMATERA },
-	{ id: 5, value: Regions.SULAWESI },
-	{ id: 6, value: Regions.NUSA_TENGGARA },
-	{ id: 7, value: Regions.PAPUA },
-];
-
-export const INTERESTS_FILTER = [
-	{ id: 0, value: Interests.NATURE },
-	{ id: 1, value: Interests.CULINARY },
-	{ id: 2, value: Interests.RECREATION },
-	{ id: 3, value: Interests.ARTS },
-];
+import { Interests, Regions } from "../../constants";
 
 export const DESTINATIONS = [
 	{

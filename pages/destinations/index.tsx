@@ -1,18 +1,15 @@
-import {
-	DESTINATIONS,
-	INTERESTS_FILTER,
-	Interests,
-	REGION_CHOICES,
-	Regions,
-} from "./constants";
 import { FC, useContext, useEffect, useState } from "react";
+import { INTERESTS_FILTER, REGION_CHOICES } from "../../constants";
+import { Interests, Regions } from "../../constants";
 
 import { Carousel } from "react-responsive-carousel";
+import { DESTINATIONS } from "./constants";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
 import Select from "../../components/Select/Select";
 import SelectChecklist from "../../components/Select/SelectChecklist";
-import Slider from "react-slick";
+import TripsCard from "../../components/TripsCard/index";
+import { split } from "../../constants";
 import { useRouter } from "next/router";
 import { useWindowSize } from "../../hooks/useWindowSize";
 
@@ -27,6 +24,7 @@ const Destinations: FC = () => {
 		<div className="flex flex-col">
 			<LandingCard indo={indo} />
 			<Content indo={indo} />
+			<TripsCard brownStyle />
 		</div>
 	);
 };
@@ -57,14 +55,7 @@ const Content: FC<PropTypes> = ({ indo }) => {
 		interestsFilter.every((e) => destination.categories.includes(e))
 	);
 
-	let elementsList = [];
-	let id = 0;
-	for (let i = 0; i < FILTERED_DESTINATIONS.length; i += columns * 2) {
-		elementsList.push({
-			id: id++,
-			value: FILTERED_DESTINATIONS.slice(i, i + columns * 2),
-		});
-	}
+	let elementsList = split(FILTERED_DESTINATIONS, columns * 2);
 
 	const justify = (i: number) => {
 		if (columns === 1) {
@@ -80,7 +71,7 @@ const Content: FC<PropTypes> = ({ indo }) => {
 	};
 
 	return (
-		<div className="flex flex-col mx-5 sm:mx-20 md:mx-32 lg:mx-20 xl:mx-32 2xl:mx-60 my-20">
+		<div className="relative flex flex-col px-2 sm:px-20 md:px-32 lg:px-20 xl:px-32 2xl:px-60 py-20">
 			<div className="px-10 flex flex-col sm:flex-row md:justify-center xl:justify-start gap-y-5 gap-x-5 lg:gap-x-20">
 				<div className="w-full sm:w-1/2 lg:w-1/3">
 					<Select
@@ -102,35 +93,47 @@ const Content: FC<PropTypes> = ({ indo }) => {
 					/>
 				</div>
 			</div>
-			<Carousel
-				showStatus={false}
-				showThumbs={false}
-				emulateTouch={true}
-				className="my-10 w-full"
-			>
-				{elementsList &&
-					elementsList.map((elements: any) => (
-						<div
-							key={elements.id}
-							className={`px-10 grid gap-y-5 lg:gap-y-10 xl:gap-y-16 gap-4 grid-rows-2 ${
-								columns === 1 && "grid-cols-1"
-							} ${columns === 2 && "grid-cols-2"} ${
-								columns === 3 && "grid-cols-3"
-							}`}
-						>
-							{elements.value.map((element: any, i: number) => (
-								<Element
-									justify={justify(i)}
-									key={element.id}
-									region={element.region}
-									categories={element.categories}
-									title={element.title}
-									imageSrc={element.imageSrc}
-								/>
-							))}
-						</div>
-					))}
-			</Carousel>
+			<div className="destinations">
+				<Carousel
+					showStatus={false}
+					showThumbs={false}
+					emulateTouch={true}
+					showIndicators={false}
+					className="my-10 w-full"
+				>
+					{elementsList &&
+						elementsList.map((elements: any) => (
+							<div
+								key={elements.id}
+								className={`px-10 grid gap-y-5 lg:gap-y-10 xl:gap-y-16 gap-4 grid-rows-2 ${
+									columns === 1 && "grid-cols-1"
+								} ${columns === 2 && "grid-cols-2"} ${
+									columns === 3 && "grid-cols-3"
+								}`}
+							>
+								{elements.value.map((element: any, i: number) => (
+									<Element
+										justify={justify(i)}
+										key={element.id}
+										region={element.region}
+										categories={element.categories}
+										title={element.title}
+										imageSrc={element.imageSrc}
+									/>
+								))}
+							</div>
+						))}
+				</Carousel>
+			</div>
+			<div className="absolute hidden lg:block lg:-bottom-28 right-0">
+				<div className="relative lg:w-[500px] lg:h-60">
+					<Image
+						src="/destinations/megamendung.png"
+						alt="Megamendung"
+						layout="fill"
+					/>
+				</div>
+			</div>
 		</div>
 	);
 };
