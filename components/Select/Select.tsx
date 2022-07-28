@@ -38,8 +38,8 @@ const Select: FC<SelectProps> = ({
 	}, [selectedRef, selectionRef]);
 
 	return (
-		<div className="relative flex flex-col gap-y-2 z-90">
-			<div className="flex flex-col gap-y-2">
+		<div className="relative flex flex-col gap-y-2">
+			<div className="flex flex-col gap-y-2 z-80">
 				<h1 className="font-ubuntu">{label}</h1>
 				<button
 					onClick={() => setShowMore(!showMore)}
@@ -71,7 +71,7 @@ const Select: FC<SelectProps> = ({
 			</div>
 			<div
 				ref={selectionRef}
-				className={`absolute top-[84px] ${fit ? "w-full" : "w-80"}`}
+				className={`absolute z-100 top-[84px] ${fit ? "w-full" : "w-80"}`}
 			>
 				<div
 					className={`w-full ${
