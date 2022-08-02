@@ -12,8 +12,8 @@ body {
 	background-color: #f3f3f3;
 }
 
-.destinations .carousel .control-arrow,
-.destinations .carousel.carousel-slider .control-arrow {
+.brown-arrow .carousel .control-arrow,
+.brown-arrow .carousel.carousel-slider .control-arrow {
 	opacity: 1;
 	border-radius: 100%;
 	height: 48px;
@@ -23,8 +23,8 @@ body {
 	margin: auto;
 }
 
-.destinations .carousel .control-arrow,
-.destinations .carousel.carousel-slider .control-arrow:hover {
+.brown-arrow .carousel .control-arrow,
+.brown-arrow .carousel.carousel-slider .control-arrow:hover {
 	opacity: 1;
 	border-radius: 100%;
 	height: 48px;
@@ -34,7 +34,7 @@ body {
 	margin: auto;
 }
 
-.destinations .carousel.carousel-slider .control-arrow {
+.brown-arrow .carousel.carousel-slider .control-arrow {
 	top: 0;
 	bottom: 0;
 	color: #fff;
@@ -69,6 +69,64 @@ body {
 	top: 0;
 	bottom: 0;
 	color: #fff;
+	font-size: 26px;
+	margin: auto;
+	padding: 5px;
+}
+
+.bigcard .carousel .control-arrow,
+.bigcard .carousel.carousel-slider .control-arrow {
+	opacity: 1;
+}
+
+.bigcard .carousel .control-arrow,
+.bigcard .carousel.carousel-slider .control-arrow:hover {
+	opacity: 1;
+	background-color: rgba(165, 104, 49, 0.7);
+}
+
+.bigcard .carousel .control-next {
+	border-bottom-right-radius: 24px;
+	border-top-right-radius: 24px;
+}
+
+.bigcard .carousel .control-prev {
+	border-bottom-left-radius: 24px;
+	border-top-left-radius: 24px;
+}
+
+.bigcard .carousel.carousel-slider .control-arrow {
+	top: 0;
+	bottom: 0;
+	font-size: 26px;
+	margin: auto;
+	padding: 5px;
+}
+
+.smallcard .carousel .control-arrow,
+.smallcard .carousel.carousel-slider .control-arrow {
+	opacity: 1;
+}
+
+.smallcard .carousel .control-arrow,
+.smallcard .carousel.carousel-slider .control-arrow:hover {
+	opacity: 1;
+	background-color: rgba(165, 104, 49, 1);
+}
+
+.smallcard .carousel .control-next {
+	border-bottom-right-radius: 12px;
+	border-top-right-radius: 12px;
+}
+
+.smallcard .carousel .control-prev {
+	border-bottom-left-radius: 12px;
+	border-top-left-radius: 12px;
+}
+
+.smallcard .carousel.carousel-slider .control-arrow {
+	top: 0;
+	bottom: 0;
 	font-size: 26px;
 	margin: auto;
 	padding: 5px;
