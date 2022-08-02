@@ -20,10 +20,10 @@ import Button from "../../components/Button/Button";
 import { Carousel } from "react-responsive-carousel";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
+import Popup from "./components/popup";
 import Select from "../../components/Select/Select";
 import SelectChecklist from "../../components/Select/SelectChecklist";
 import TripsCard from "../../components/TripsCard";
-import { useForm } from "react-hook-form";
 import { useWindowSize } from "../../hooks/useWindowSize";
 
 const Trips: FC = () => {
@@ -44,12 +44,11 @@ const TripsDisplay: FC = () => {
 	const [regionFilter, setRegionFilter] = useState<Regions>(Regions.ALL);
 	const [sortFilter, setSortFilter] = useState<Sorts>(Sorts.MOST_POPULAR);
 	const [interestsFilter, setInterestsFilter] = useState<Interests[]>([]);
-	const [bookings, setBookings] = useState<BookingsType[]>(BOOKINGS);
 	const [bookingsLists, setBookingsLists] = useState<
 		{ id: number; value: BookingsType[] }[]
 	>([]);
+	const [showFilterBar, setShowFilterBar] = useState<boolean>(false);
 	const windowSize = useWindowSize();
-	const indo = useContext(IndoContext);
 
 	const filters = {
 		filter,
@@ -69,7 +68,11 @@ const TripsDisplay: FC = () => {
 	useEffect(() => {
 		if ((windowSize.width ?? 0) >= 1400) {
 			setColumns(3);
-		} else if ((windowSize.width ?? 0) >= 900) {
+		} else if ((windowSize.width ?? 0) >= 1000) {
+			setColumns(2);
+		} else if ((windowSize.width ?? 5000) <= 600) {
+			setColumns(1);
+		} else if ((windowSize.width ?? 5000) <= 768) {
 			setColumns(2);
 		} else {
 			setColumns(1);
@@ -78,6 +81,7 @@ const TripsDisplay: FC = () => {
 
 	useEffect(() => {
 		let result = BOOKINGS;
+
 		if (filter !== "") {
 			result = result.filter(
 				(booking) => booking.title.toLowerCase().indexOf(filter) !== -1
@@ -96,17 +100,28 @@ const TripsDisplay: FC = () => {
 			);
 		}
 
-		result = result
-			.filter(
-				(booking) =>
-					booking.region === Regions.ALL || booking.region === regionFilter
-			)
-			.filter((booking) =>
-				interestsFilter.every((e) => booking.categories.includes(e))
-			);
+		result = result.filter(
+			(booking) =>
+				regionFilter === Regions.ALL || booking.region === regionFilter
+		);
+
+		result = result.filter((booking) =>
+			interestsFilter.every((e) => booking.categories.includes(e))
+		);
+
+		result.sort(function (a, b) {
+			if (sortFilter === Sorts.LOWEST_PRICE) {
+				return a.price - b.price;
+			} else if (sortFilter === Sorts.HIGHEST_PRICE) {
+				return b.price - a.price;
+			} else if (sortFilter === Sorts.MOST_POPULAR) {
+				return b.reviews - a.reviews;
+			} else {
+				throw Error("Sort Filter Error");
+			}
+		});
 
 		setBookingsLists(split(result, columns * 2));
-		setBookings(result);
 	}, [
 		filter,
 		minPriceFilter,
@@ -117,28 +132,82 @@ const TripsDisplay: FC = () => {
 		columns,
 	]);
 
-	console.log(bookings);
-
 	return (
-		<div className="mt-20 mx-5 md:mx-16 lg:mx-24 xl:mx-32 2xl:mx-40 flex flex-row gap-x-5">
-			<FilterBar {...filters} />
-			<div className="bookings w-2/3 xl:w-3/4 2xl:w-4/5">
-				<Carousel showStatus={false} showThumbs={false}>
-					{bookingsLists.map((bookings) => (
-						<div
-							key={bookings.id}
-							className={`px-10 xl:px-14 2xl:px-20 py-10 grid gap-4 grid-rows-2 ${
-								columns === 1 && "grid-cols-1"
-							} ${columns === 2 && "grid-cols-2"} ${
-								columns === 3 && "grid-cols-3"
-							} ${columns === 4 && "grid-cols-4"}`}
-						>
-							{bookings.value.map((booking) => (
-								<BookingCard key={booking.id} {...booking} />
+		<div className="relative">
+			<div className="absolute z-40 top-0 left-0">
+				<div className="relative w-72 h-40 lg:w-96 lg:h-60">
+					<Image
+						src="/trips/megamendung.png"
+						layout="fill"
+						objectFit="cover"
+						alt="Megamendung"
+					/>
+				</div>
+			</div>
+			{
+				<Popup showPopup={showFilterBar} setShowPopup={setShowFilterBar}>
+					<div
+						className={`w-full bg-white transition-all duration-200 ${
+							showFilterBar ? "h-[500px] text-black" : "text-transparent h-0"
+						}`}
+					>
+						<FilterBar popup columns={columns} {...filters} />
+					</div>
+				</Popup>
+			}
+			<div className="flex flex-col mt-20 mx-5 md:mx-16 lg:mx-24 xl:mx-32 2xl:mx-40 pt-20 md:pt-10 lg:pt-28">
+				<div className="md:hidden flex justify-center">
+					<Button
+						label={<h1 className="text-black">Filter</h1>}
+						rightIcon={
+							<div className="text-lightBrown">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									strokeWidth={2}
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+									/>
+								</svg>
+							</div>
+						}
+						type="secondary"
+						width={150}
+						height={30}
+						onClick={() => setShowFilterBar(true)}
+					/>
+				</div>
+				<div className="flex flex-row gap-x-5">
+					<FilterBar columns={columns} {...filters} />
+					<div
+						className={`bookings ${columns === 1 && "w-full md:w-[55%]"} ${
+							columns === 2 && "w-full md:w-2/3"
+						} ${columns === 3 && "xl:w-3/4 2xl:w-4/5"}`}
+					>
+						<Carousel className="w-full" showStatus={false} showThumbs={false}>
+							{bookingsLists.map((bookings) => (
+								<div
+									key={bookings.id}
+									className={`px-10 xl:px-14 2xl:px-20 py-10 grid gap-4 grid-rows-2 ${
+										columns === 1 && "grid-cols-1"
+									} ${columns === 2 && "grid-cols-2"} ${
+										columns === 3 && "grid-cols-3"
+									} ${columns === 4 && "grid-cols-4"}`}
+								>
+									{bookings.value.map((booking) => (
+										<BookingCard key={booking.id} {...booking} />
+									))}
+								</div>
 							))}
-						</div>
-					))}
-				</Carousel>
+						</Carousel>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
@@ -157,6 +226,8 @@ type FilterBarProps = {
 	setSortFilter: Function;
 	interestsFilter: Interests[];
 	setInterestsFilter: Function;
+	columns: number;
+	popup?: boolean | undefined;
 };
 
 const FilterBar: FC<FilterBarProps> = ({
@@ -172,11 +243,21 @@ const FilterBar: FC<FilterBarProps> = ({
 	setSortFilter,
 	interestsFilter,
 	setInterestsFilter,
+	columns,
+	popup,
 }) => {
 	const indo = useContext(IndoContext);
 
 	return (
-		<div className="flex flex-col w-1/3 xl:w-1/4 2xl:w-1/5 rounded-xl shadow-2xl divide-y divide-gray/50">
+		<div
+			className={`bg-primary ${
+				popup ? "overflow-auto max-h-full w-full" : "hidden max-h-[730px]"
+			} md:flex flex-col ${!popup && columns === 1 && "w-[45%]"} ${
+				!popup && columns === 2 && "w-1/3"
+			} ${
+				!popup && columns === 3 && "xl:w-1/4 2xl:w-1/5"
+			} rounded-xl shadow-2xl divide-y divide-gray z-50`}
+		>
 			<div className="flex flex-col gap-y-5 p-5 py-7">
 				<h1 className="ml-2 font-semibold">
 					{indo ? "Cari tujuan Anda" : "Look for your next destination"}
@@ -246,7 +327,7 @@ const FilterBar: FC<FilterBarProps> = ({
 					</div>
 				</div>
 			</div>
-			{/* <div className="p-5 py-7">
+			<div className="p-5 py-7">
 				<Select
 					label={
 						<h1 className="ml-2 font-semibold">
@@ -285,7 +366,7 @@ const FilterBar: FC<FilterBarProps> = ({
 					options={SORT_FILTER}
 					fit={true}
 				/>
-			</div> */}
+			</div>
 		</div>
 	);
 };
@@ -306,12 +387,12 @@ const LandingCard = () => {
 				/>
 			</div>
 			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full md:w-2/5 flex flex-col gap-y-10 justify-center z-60">
-				<h1 className="text-center md:text-left text-2xl sm:text-4xl xl:text-6xl font-bold">
+				<h1 className="drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
 					{indo
 						? "Rasakan Penjalanan yang Tidak Terlupakan"
 						: "Experience world-class trip with Us"}
 				</h1>
-				<h1 className="font-ubuntu font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
+				<h1 className="drop-shadow-2xl font-ubuntu font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
 					{indo
 						? ""
 						: "Pack your bag, set your sights, and get ready for a memorable trip"}

@@ -105,4 +105,15 @@ export const BOOKINGS: BookingsType[] = [
 		days: 3,
 		price: 3000000,
 	},
+	{
+		id: 9,
+		imageSrc: "/trips/bromo.jpeg",
+		categories: [Interests.NATURE],
+		region: Regions.JAVA,
+		title: "Bromo",
+		rating: 5.0,
+		reviews: 3024,
+		days: 3,
+		price: 3000000,
+	},
 ];
