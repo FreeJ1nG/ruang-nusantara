@@ -5,19 +5,29 @@ type ButtonProps = {
 	label: string | ReactNode;
 	disabled?: boolean | undefined;
 	align?: "left" | "right" | "center" | "justify" | undefined;
+	footer?: boolean | undefined;
+	blackText?: boolean | undefined;
 };
 
-const Button: FC<ButtonProps> = ({ onClick, label, disabled, align }) => {
+const Button: FC<ButtonProps> = ({
+	onClick,
+	label,
+	disabled,
+	align,
+	footer,
+	blackText,
+}) => {
 	return (
 		<div
 			onClick={() => {
 				if (onClick) onClick();
 			}}
-			className="w-full"
 		>
 			<button>
 				<h1
-					className={`transition-all duration-75 hover:text-lightBrown text-footerText font-medium text-sm md:text-lg ${
+					className={`transition-all duration-75 hover:text-lightBrown ${
+						blackText && "text-black"
+					} ${footer && "text-footerText"} font-medium text-sm md:text-lg ${
 						align === "left" && "text-left"
 					} ${align === "center" && "text-center"} ${
 						align === "right" && "text-right"

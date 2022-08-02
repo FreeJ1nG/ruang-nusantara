@@ -55,17 +55,17 @@ const Button: FC<ButtonProps> = ({
 				<div
 					className={`transition-all duration-500 w-0 group-hover:w-full ${
 						type === "primary" && "bg-darkBrown"
-					} ${type === "secondary" && "bg-yellow-400"}`}
+					} ${type === "secondary" && "bg-lightBrown"}`}
 				/>
 				<div className={`transition-all duration-500 w-full group-hover:w-0`} />
 			</div>
 			<div
 				className={`${type === "primary" && "text-white"} ${
-					type === "secondary" && "text-lightBrown"
-				} w-full flex flex-row gap-x-5 justify-center items-center`}
+					type === "secondary" && "text-lightBrown group-hover:text-white"
+				} w-full flex flex-row gap-x-5 justify-center items-center transition-all duration-200`}
 			>
 				{leftIcon && <div className={"z-40"}>{leftIcon}</div>}
-				<h1 className="font-bold z-40">{label}</h1>
+				<div className="font-bold z-40">{label}</div>
 				{rightIcon && <div className={"z-40"}>{rightIcon}</div>}
 			</div>
 		</button>
