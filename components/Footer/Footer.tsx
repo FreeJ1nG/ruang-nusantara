@@ -97,12 +97,12 @@ const Shop: FC = () => {
 	return (
 		<div className="flex flex-col gap-y-3">
 			<h1 className={brownTitle}>TRAVEL INTERESTS</h1>
-			<TertiaryButton label="Paintings" align="left" />
-			<TertiaryButton label="Sculpture" align="left" />
-			<TertiaryButton label="Fashion" align="left" />
-			<TertiaryButton label="Frozen Foods" align="left" />
-			<TertiaryButton label="Crafts" align="left" />
-			<TertiaryButton label="Non-English Guides" align="left" />
+			<TertiaryButton footer label="Paintings" align="left" />
+			<TertiaryButton footer label="Sculpture" align="left" />
+			<TertiaryButton footer label="Fashion" align="left" />
+			<TertiaryButton footer label="Frozen Foods" align="left" />
+			<TertiaryButton footer label="Crafts" align="left" />
+			<TertiaryButton footer label="Non-English Guides" align="left" />
 		</div>
 	);
 };
@@ -111,10 +111,14 @@ const AboutUs: FC = () => {
 	return (
 		<div className="flex flex-col gap-y-3">
 			<h1 className={brownTitle}>ABOUT US</h1>
-			<TertiaryButton label="About Ruang Nusantara" align="left" />
-			<TertiaryButton label="Press, Trade, and Advertising" align="left" />
-			<TertiaryButton label="Work For Us" align="left" />
-			<TertiaryButton label="Terms and Conditions" align="left" />
+			<TertiaryButton footer label="About Ruang Nusantara" align="left" />
+			<TertiaryButton
+				footer
+				label="Press, Trade, and Advertising"
+				align="left"
+			/>
+			<TertiaryButton footer label="Work For Us" align="left" />
+			<TertiaryButton footer label="Terms and Conditions" align="left" />
 		</div>
 	);
 };
@@ -124,13 +128,13 @@ const TravelInterests: FC = () => {
 	return (
 		<div className="flex flex-col gap-y-3">
 			<h1 className={brownTitle}>TRAVEL INTERESTS</h1>
-			<TertiaryButton label="Art and Culture" align="left" />
-			<TertiaryButton label="Beaches" align="left" />
-			<TertiaryButton label="Culinary" align="left" />
-			<TertiaryButton label="Family Holidays" align="left" />
-			<TertiaryButton label="Fashion" align="left" />
-			<TertiaryButton label="Travel on Budget" align="left" />
-			<TertiaryButton label="Wildlife and Nature" align="left" />
+			<TertiaryButton footer label="Art and Culture" align="left" />
+			<TertiaryButton footer label="Beaches" align="left" />
+			<TertiaryButton footer label="Culinary" align="left" />
+			<TertiaryButton footer label="Family Holidays" align="left" />
+			<TertiaryButton footer label="Fashion" align="left" />
+			<TertiaryButton footer label="Travel on Budget" align="left" />
+			<TertiaryButton footer label="Wildlife and Nature" align="left" />
 		</div>
 	);
 };
@@ -139,8 +143,8 @@ const HelpCenter: FC = () => {
 	return (
 		<div className="flex flex-col gap-y-3">
 			<h1 className={brownTitle}>HELP CENTER</h1>
-			<TertiaryButton label="Contact Us" align="left" />
-			<TertiaryButton label="FAQ" align="left" />
+			<TertiaryButton footer label="Contact Us" align="left" />
+			<TertiaryButton footer label="FAQ" align="left" />
 		</div>
 	);
 };
@@ -150,14 +154,14 @@ const TopDestinations: FC = () => {
 	return (
 		<div className="flex flex-col gap-y-3">
 			<h1 className={brownTitle}>TOP DESTINATIONS</h1>
-			<TertiaryButton label="Bali" align="left" />
-			<TertiaryButton label="Labuan Bajo" align="left" />
-			<TertiaryButton label="Java" align="left" />
-			<TertiaryButton label="Sumatera" align="left" />
-			<TertiaryButton label="Kalimantan" align="left" />
-			<TertiaryButton label="Sulawesi" align="left" />
-			<TertiaryButton label="Papua" align="left" />
-			<TertiaryButton label="Maluku" align="left" />
+			<TertiaryButton footer label="Bali" align="left" />
+			<TertiaryButton footer label="Labuan Bajo" align="left" />
+			<TertiaryButton footer label="Java" align="left" />
+			<TertiaryButton footer label="Sumatera" align="left" />
+			<TertiaryButton footer label="Kalimantan" align="left" />
+			<TertiaryButton footer label="Sulawesi" align="left" />
+			<TertiaryButton footer label="Papua" align="left" />
+			<TertiaryButton footer label="Maluku" align="left" />
 		</div>
 	);
 };
