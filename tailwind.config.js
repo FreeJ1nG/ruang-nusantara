@@ -15,6 +15,7 @@ module.exports = {
 				ubuntu: ["Ubuntu", "sans-serif"],
 			},
 			colors: {
+				primary: "#f3f3f3",
 				defaultText: "#41342B",
 				yellowText: "#FFD552",
 
@@ -41,7 +42,16 @@ module.exports = {
 				lighter3: "#969696",
 
 				gray: "#B3B3B3",
+				gray2: "#636363",
+				gray3: "#838383",
+				gray4: "#434343",
+				gray5: "#50504F",
+
 				orange: "#F56801",
+
+				productCardGray: "#A7A7A7",
+
+				hyperlink: "#215EFB",
 			},
 			zIndex: {
 				5: "5",
