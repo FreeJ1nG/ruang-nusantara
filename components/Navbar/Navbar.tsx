@@ -1,8 +1,10 @@
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 
+import { BLACK_TEXT } from "./constants";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
 import Link from "next/link";
+import { MENUS } from "./constants";
 import Popup from "./components/Popup/Popup";
 import { useRouter } from "next/router";
 
@@ -16,33 +18,21 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 	const [showMenu, setShowMenu] = useState<boolean>(false);
 
 	return (
-		<div className="text-white">
+		<div
+			className={`${
+				BLACK_TEXT.filter(
+					(route: string) =>
+						router.pathname.includes(route) && route !== router.pathname
+				).length > 0
+					? "text-black"
+					: "text-white"
+			} `}
+		>
 			<Popup showPopup={showMenu} setShowPopup={setShowMenu}>
 				<div className="w-full h-full p-10 flex flex-col gap-y-5">
-					<MenuElement
-						where="/"
-						indoTitle="Utama"
-						englishTitle="Home"
-						setShowMenu={setShowMenu}
-					/>
-					<MenuElement
-						where="/destinations"
-						indoTitle="Tujuan"
-						englishTitle="Destinations"
-						setShowMenu={setShowMenu}
-					/>
-					<MenuElement
-						where="/trips"
-						indoTitle="Perjalanan"
-						englishTitle="Trips"
-						setShowMenu={setShowMenu}
-					/>
-					<MenuElement
-						where="/shop"
-						indoTitle="Belanja"
-						englishTitle="Shop"
-						setShowMenu={setShowMenu}
-					/>
+					{MENUS.map((menu) => (
+						<MenuElement key={menu.id} {...menu} />
+					))}
 				</div>
 			</Popup>
 			<div className="z-90 absolute top-0 left-0 right-0 flex flex-row justify-between items-center px-5 md:px-10 xl:px-20 h-24 bg-transparent">
@@ -77,30 +67,9 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 					</button>
 				</div>
 				<div className="hidden lg:flex flex-row items-center gap-x-5">
-					<MenuElement
-						where="/"
-						indoTitle="Utama"
-						englishTitle="Home"
-						setShowMenu={setShowMenu}
-					/>
-					<MenuElement
-						where="/destinations"
-						indoTitle="Tujuan"
-						englishTitle="Destinations"
-						setShowMenu={setShowMenu}
-					/>
-					<MenuElement
-						where="/trips"
-						indoTitle="Perjalanan"
-						englishTitle="Trips"
-						setShowMenu={setShowMenu}
-					/>
-					<MenuElement
-						where="/shop"
-						indoTitle="Belanja"
-						englishTitle="Shop"
-						setShowMenu={setShowMenu}
-					/>
+					{MENUS.map((menu) => (
+						<MenuElement key={menu.id} {...menu} />
+					))}
 					<LanguageButton indo={indo} setIndo={setIndo} />
 				</div>
 			</div>
@@ -111,18 +80,63 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 type MenuElementPropType = {
 	where: string;
 	indoTitle: string;
+	indoFocusTitle?: string | undefined;
 	englishTitle: string;
+	englishFocusTitle?: string | undefined;
 	setShowMenu?: Function | undefined;
 };
 
 const MenuElement: FC<MenuElementPropType> = ({
 	where,
 	indoTitle,
+	indoFocusTitle,
 	englishTitle,
+	englishFocusTitle,
 	setShowMenu,
 }) => {
 	const router = useRouter();
 	const indo = useContext(IndoContext);
+	const [title, setTitle] = useState<{
+		indo: string;
+		english: string;
+	}>({
+		indo:
+			router.pathname === where
+				? indoFocusTitle
+					? indoFocusTitle
+					: indoTitle
+				: indoTitle,
+		english:
+			router.pathname === where
+				? englishFocusTitle
+					? englishFocusTitle
+					: englishTitle
+				: englishTitle,
+	});
+
+	useEffect(() => {
+		setTitle({
+			indo:
+				router.pathname === where
+					? indoFocusTitle
+						? indoFocusTitle
+						: indoTitle
+					: indoTitle,
+			english:
+				router.pathname === where
+					? englishFocusTitle
+						? englishFocusTitle
+						: englishTitle
+					: englishTitle,
+		});
+	}, [
+		router,
+		where,
+		englishTitle,
+		englishFocusTitle,
+		indoTitle,
+		indoFocusTitle,
+	]);
 
 	return (
 		<button
@@ -133,10 +147,15 @@ const MenuElement: FC<MenuElementPropType> = ({
 		>
 			<h1
 				className={`drop-shadow-2xl text-left lg:text-center font-poppins font-semibold text-base xl:text-lg px-4 py-1 rounded-full transition-all duration-300 ${
-					router.pathname === where ? "bg-lightBrown" : "bg-transparent"
+					where !== "/" &&
+					(router.pathname.includes(where)
+						? "bg-lightBrown text-white"
+						: "bg-transparent")
+				} ${
+					where === "/" && router.pathname === "/" && "bg-lightBrown text-white"
 				}`}
 			>
-				{indo ? indoTitle : englishTitle}
+				{indo ? title.indo : title.english}
 			</h1>
 		</button>
 	);
@@ -148,7 +167,6 @@ type LanguageButtonProps = {
 };
 
 const LanguageButton: FC<LanguageButtonProps> = ({ indo, setIndo }) => {
-	console.log(indo);
 	return (
 		<button
 			onClick={() => setIndo(!indo)}
