@@ -1,9 +1,9 @@
+import { DESTINATIONS, To_Interest, To_Region } from "./constants";
 import { FC, useContext, useEffect, useState } from "react";
 import { INTERESTS_FILTER, REGION_CHOICES } from "../../constants";
 import { Interests, Regions } from "../../constants";
 
 import { Carousel } from "react-responsive-carousel";
-import { DESTINATIONS } from "./constants";
 import DestinationCard from "../../components/DestinationCard/index";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
@@ -32,7 +32,12 @@ const Destinations: FC = () => {
 
 const Content: FC<PropTypes> = ({ indo }) => {
 	const router = useRouter();
-	const [regionFilter, setRegionFilter] = useState<Regions>(Regions.ALL);
+	const {
+		query: { region, interests },
+	} = router;
+	const Region: string = (Array.isArray(region) ? region[0] : region) ?? "all";
+
+	const [regionFilter, setRegionFilter] = useState<Regions>(To_Region[Region]);
 	const [interestsFilter, setInterestsFilter] = useState<Interests[]>([]);
 	const windowSize = useWindowSize();
 	const [columns, setColumns] = useState<number>(1);
