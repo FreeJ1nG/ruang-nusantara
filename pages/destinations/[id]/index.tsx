@@ -1,10 +1,8 @@
 import {
 	ATTRACTIONS,
-	AttractionType,
 	Attractions,
 	DESTINATIONS,
 	DESTINATION_DETAIL,
-	DestinationDetailType,
 	DestinationType,
 } from "../constants";
 import DestinationCard from "../../../components/DestinationCard";
@@ -71,14 +69,18 @@ type PropsType = {
 const OtherDestinationsCard: FC<PropsType> = ({ destination, columns }) => {
 	const [destinationsLists, setDestinationsLists] = useState(
 		split(
-			DESTINATIONS.filter((d) => d.region === destination?.region),
+			DESTINATIONS.filter(
+				(d) => d.region === destination?.region && d.id !== destination.id
+			),
 			columns ?? 1
 		)
 	);
 	useEffect(() => {
 		setDestinationsLists(
 			split(
-				DESTINATIONS.filter((d) => d.region === destination?.region),
+				DESTINATIONS.filter(
+					(d) => d.region === destination?.region && d.id !== destination.id
+				),
 				columns ?? 1
 			)
 		);
@@ -178,8 +180,6 @@ const AttractionsCard: FC<PropsType> = ({ destination, columns }) => {
 			)
 		);
 	}, [type, columns]);
-
-	console.log(attractionsLists);
 
 	return (
 		<div className="flex flex-col gap-y-10">
@@ -297,7 +297,7 @@ const ContentCard: FC<PropsType> = ({ destination }) => {
 	);
 
 	return (
-		<div className="py-10 flex flex-col gap-y-10">
+		<div className="flex flex-col gap-y-10">
 			<div className="flex flex-col">
 				<h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wide">
 					{destination?.title}
@@ -400,7 +400,7 @@ const Routes: FC<PropsType> = ({ destination }) => {
 		<div className="flex flex-row gap-x-2 items-center">
 			<TertiaryButton
 				label={
-					<div className="underline font-semibold">
+					<div className="underline font-semibold text-xs sm:text-sm md:text-base">
 						{destination?.region ?? "NOT FOUND"}
 					</div>
 				}
@@ -418,7 +418,7 @@ const Routes: FC<PropsType> = ({ destination }) => {
 			</svg>
 			<TertiaryButton
 				label={
-					<div className="underline font-semibold">
+					<div className="underline font-semibold text-xs sm:text-sm md:text-base">
 						{destination?.categories[0] ?? "NOT FOUND"}
 					</div>
 				}
