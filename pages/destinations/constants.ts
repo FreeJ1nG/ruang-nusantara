@@ -38,6 +38,24 @@ export type DestinationDetailType = {
 	headlineContent: string;
 };
 
+export const To_Region: { [key: string]: Regions } = {
+	all: Regions.ALL,
+	bali: Regions.BALI,
+	java: Regions.JAVA,
+	kalimantan: Regions.KALIMANTAN,
+	sumatera: Regions.SUMATERA,
+	sulawesi: Regions.SULAWESI,
+	nusa_tenggara: Regions.NUSA_TENGGARA,
+	papua: Regions.PAPUA,
+};
+
+export const To_Interest: { [key: string]: Interests } = {
+	nature: Interests.NATURE,
+	culinary: Interests.CULINARY,
+	recreation: Interests.RECREATION,
+	arts: Interests.ARTS,
+};
+
 export const DESTINATIONS: DestinationType[] = [
 	{
 		id: 0,
