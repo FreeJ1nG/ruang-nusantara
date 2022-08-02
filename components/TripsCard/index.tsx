@@ -55,7 +55,12 @@ const TripsCard: FC<PropTypes> = ({ brownStyle }) => {
 			</div>
 			<div className="lg:h-[500px] xl:h-[650px] flex flex-col gap-y-10 lg:flex-row gap-x-5 xl:gap-x-14">
 				<div className="bigcard h-[500px] xl:h-[650px] w-full lg:w-1/2 2xl:w-3/5 rounded-3xl shadow-2xl">
-					<Carousel emulateTouch={true} showStatus={false} className="w-full">
+					<Carousel
+						emulateTouch={true}
+						showThumbs={false}
+						showStatus={false}
+						className="w-full"
+					>
 						{BIG_STORIES.map((story) => {
 							return (
 								<div key={story.id} className="rounded-3xl w-full">
