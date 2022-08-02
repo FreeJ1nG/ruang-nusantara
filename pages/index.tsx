@@ -129,7 +129,7 @@ const HomepageCard: FC<PropTypes> = ({ indo }) => {
 				/>
 			</div>
 			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full md:w-2/5 flex flex-col gap-y-10 justify-center z-60">
-				<h1 className="text-center md:text-left text-2xl sm:text-4xl xl:text-6xl font-bold">
+				<h1 className="drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
 					{indo
 						? "Rasakan Penjalanan yang Tidak Terlupakan"
 						: "Discover story-worthy travel moments"}
