@@ -22,6 +22,17 @@ export enum Sorts {
 	MOST_POPULAR = "Most Popular",
 }
 
+export enum Genres {
+	ALL = "All",
+	PAINTINGS = "Paintings",
+	FASHION = "Fashion",
+	CRAFTS = "Crafts",
+	BOOKS = "Books",
+	CULINARY = "Culinary",
+	DIY_KITS = "DIY Kits",
+	TRAVEL_KITS = "Travel Kits",
+}
+
 export type BookingsType = {
 	id: number;
 	imageSrc: string;
@@ -35,6 +46,17 @@ export type BookingsType = {
 	trending?: boolean | undefined;
 	onClick?: Function | undefined;
 };
+
+export const GENRES = [
+	{ id: 0, value: Genres.ALL },
+	{ id: 1, value: Genres.PAINTINGS },
+	{ id: 2, value: Genres.FASHION },
+	{ id: 3, value: Genres.CRAFTS },
+	{ id: 4, value: Genres.BOOKS },
+	{ id: 5, value: Genres.CULINARY },
+	{ id: 6, value: Genres.DIY_KITS },
+	{ id: 7, value: Genres.TRAVEL_KITS },
+];
 
 export const REGION_CHOICES = [
 	{ id: 0, value: Regions.ALL },
