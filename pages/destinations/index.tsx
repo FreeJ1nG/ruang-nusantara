@@ -4,6 +4,7 @@ import { Interests, Regions } from "../../constants";
 
 import { Carousel } from "react-responsive-carousel";
 import { DESTINATIONS } from "./constants";
+import DestinationCard from "../../components/DestinationCard/index";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
 import Select from "../../components/Select/Select";
@@ -57,19 +58,6 @@ const Content: FC<PropTypes> = ({ indo }) => {
 
 	let elementsList = split(FILTERED_DESTINATIONS, columns * 2);
 
-	const justify = (i: number) => {
-		if (columns === 1) {
-			return "center";
-		} else if (columns === 2) {
-			if (i % 2 === 0) return "center";
-			if (i % 2 === 1) return "center";
-		} else {
-			if (i % 3 === 0) return "left";
-			if (i % 3 === 1) return "center";
-			if (i % 3 === 2) return "right";
-		}
-	};
-
 	return (
 		<div className="relative flex flex-col px-2 sm:px-20 md:px-32 lg:px-20 xl:px-32 2xl:px-60 py-20">
 			<div className="px-10 flex flex-col sm:flex-row md:justify-center xl:justify-start gap-y-5 gap-x-5 lg:gap-x-20">
@@ -93,7 +81,7 @@ const Content: FC<PropTypes> = ({ indo }) => {
 					/>
 				</div>
 			</div>
-			<div className="destinations">
+			<div className="brown-arrow">
 				<Carousel
 					showStatus={false}
 					showThumbs={false}
@@ -105,16 +93,16 @@ const Content: FC<PropTypes> = ({ indo }) => {
 						elementsList.map((elements: any) => (
 							<div
 								key={elements.id}
-								className={`px-10 grid gap-y-5 lg:gap-y-10 xl:gap-y-16 gap-4 grid-rows-2 ${
+								className={`py-10 px-10 grid gap-y-5 lg:gap-y-10 xl:gap-y-16 gap-4 grid-rows-2 ${
 									columns === 1 && "grid-cols-1"
 								} ${columns === 2 && "grid-cols-2"} ${
 									columns === 3 && "grid-cols-3"
 								}`}
 							>
 								{elements.value.map((element: any, i: number) => (
-									<Element
-										justify={justify(i)}
+									<DestinationCard
 										key={element.id}
+										id={element.id}
 										region={element.region}
 										categories={element.categories}
 										title={element.title}
@@ -138,48 +126,6 @@ const Content: FC<PropTypes> = ({ indo }) => {
 	);
 };
 
-type ElementProps = {
-	justify?: "left" | "center" | "right" | undefined;
-	region: string;
-	categories: Interests[];
-	title: string;
-	imageSrc: string;
-};
-
-const Element: FC<ElementProps> = ({
-	justify,
-	region,
-	categories,
-	title,
-	imageSrc,
-}) => {
-	return (
-		<div
-			className={`flex ${justify === "left" && "justify-start"} ${
-				justify === "center" && "justify-center"
-			} ${justify === "right" && "justify-end"}`}
-		>
-			<div className="flex flex-col items-start gap-y-2 font-ubuntu p-1">
-				<div className="relative w-60 h-60 sm:w-72 sm:h-72 xl:w-80 xl:h-80">
-					<Image
-						src={imageSrc}
-						layout="fill"
-						objectFit="cover"
-						alt={title}
-						className="rounded-xl"
-					/>
-				</div>
-				<div className="flex flex-row items-center gap-x-4 text-sm font-medium my-1 mt-2">
-					<h1 className="text-xs sm:text-sm">{region}</h1>
-					<div className="w-1 h-1 rounded-full bg-gray" />
-					<h1 className="text-gray text-xs">{categories[0]}</h1>
-				</div>
-				<h1 className="text-2xl leading-none font-bold text-left">{title}</h1>
-			</div>
-		</div>
-	);
-};
-
 const LandingCard: FC<PropTypes> = ({ indo }) => {
 	const router = useRouter();
 
@@ -197,7 +143,7 @@ const LandingCard: FC<PropTypes> = ({ indo }) => {
 			</div>
 			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full flex flex-row items-center z-60">
 				<div className="w-full md:w-2/5 flex flex-col gap-y-10">
-					<h1 className="drop-shadow-2xl text-center md:text-left text-2xl sm:text-4xl xl:text-6xl font-bold">
+					<h1 className="drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
 						{indo
 							? "Jelajahi Indonesia!"
 							: "Explore different regions of Indonesia!"}
