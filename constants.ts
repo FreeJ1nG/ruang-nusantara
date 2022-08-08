@@ -3,6 +3,77 @@ export enum Interests {
 	CULINARY = "Culinary and Wellness",
 	RECREATION = "Recreation and Leisure",
 	ARTS = "Arts, Culture, and Heritage",
+	THEME_PARK = "Theme Park",
+}
+
+export const To_Interest: { [key: string]: Interests } = {
+	"Nature and Wildlife": Interests.NATURE,
+	"Culinary and Wellness": Interests.CULINARY,
+	"Recreation and Leisure": Interests.RECREATION,
+	"Arts, Culture, and Heritage": Interests.ARTS,
+	"Theme Park": Interests.THEME_PARK,
+};
+
+export const INTERESTS_CARDS: {
+	id: number;
+	imageSrc: string;
+	label: string;
+	value: Interests;
+}[] = [
+	{
+		id: 0,
+		imageSrc: "/cards/nature.png",
+		label: "Nature",
+		value: Interests.NATURE,
+	},
+	{
+		id: 1,
+		imageSrc: "/cards/culinary.png",
+		label: "Culinary",
+		value: Interests.CULINARY,
+	},
+	{
+		id: 2,
+		imageSrc: "/cards/recreation.png",
+		label: "Recreation",
+		value: Interests.RECREATION,
+	},
+	{ id: 3, imageSrc: "/cards/arts.png", label: "Arts", value: Interests.ARTS },
+	{
+		id: 4,
+		imageSrc: "/cards/theme_park.png",
+		label: "Theme Park",
+		value: Interests.THEME_PARK,
+	},
+];
+
+export enum Months {
+	January = "Jan",
+	February = "Feb",
+	March = "Mar",
+	April = "Apr",
+	May = "May",
+	June = "Jun",
+	July = "Jul",
+	August = "Aug",
+	September = "Sep",
+	October = "Oct",
+	November = "Nov",
+	December = "Dec",
+}
+
+export enum Addons {
+	TOUR_GUIDES = "Tour Guides",
+	ELDERLY = "Elderly",
+	VEGAN = "Vegan",
+	KIDS = "Travelling with small kids",
+}
+
+export enum TravelType {
+	COUPLE = "Couple",
+	FAMILY = "Family",
+	FRIENDS = "Friends",
+	SOLO = "Solo",
 }
 
 export enum Regions {
@@ -16,14 +87,30 @@ export enum Regions {
 	PAPUA = "Papua",
 }
 
+export const To_Region: { [key: string]: Regions } = {
+	"All Regions": Regions.ALL,
+	Bali: Regions.BALI,
+	Java: Regions.JAVA,
+	Kalimantan: Regions.KALIMANTAN,
+	Sumatera: Regions.SUMATERA,
+	Sulawesi: Regions.SULAWESI,
+	"Nusa Tenggara": Regions.NUSA_TENGGARA,
+	Papua: Regions.PAPUA,
+};
+
 export enum Sorts {
 	LOWEST_PRICE = "Lowest Price",
 	HIGHEST_PRICE = "Highest Price",
 	MOST_POPULAR = "Most Popular",
 }
 
+export const To_Sort: { [key: string]: Sorts } = {
+	"Lowest Price": Sorts.LOWEST_PRICE,
+	"Highest Price": Sorts.HIGHEST_PRICE,
+	"Most Popular": Sorts.MOST_POPULAR,
+};
+
 export enum Genres {
-	ALL = "All",
 	PAINTINGS = "Paintings",
 	FASHION = "Fashion",
 	CRAFTS = "Crafts",
@@ -32,6 +119,16 @@ export enum Genres {
 	DIY_KITS = "DIY Kits",
 	TRAVEL_KITS = "Travel Kits",
 }
+
+export const To_Genres: { [key: string]: Genres } = {
+	Paintings: Genres.PAINTINGS,
+	Fashion: Genres.FASHION,
+	Crafts: Genres.CRAFTS,
+	Books: Genres.BOOKS,
+	Culinary: Genres.CULINARY,
+	"DIY Kits": Genres.DIY_KITS,
+	"Travel Kits": Genres.TRAVEL_KITS,
+};
 
 export type BookingsType = {
 	id: number;
@@ -48,14 +145,13 @@ export type BookingsType = {
 };
 
 export const GENRES = [
-	{ id: 0, value: Genres.ALL },
-	{ id: 1, value: Genres.PAINTINGS },
-	{ id: 2, value: Genres.FASHION },
-	{ id: 3, value: Genres.CRAFTS },
-	{ id: 4, value: Genres.BOOKS },
-	{ id: 5, value: Genres.CULINARY },
-	{ id: 6, value: Genres.DIY_KITS },
-	{ id: 7, value: Genres.TRAVEL_KITS },
+	{ id: 0, value: Genres.PAINTINGS },
+	{ id: 1, value: Genres.FASHION },
+	{ id: 2, value: Genres.CRAFTS },
+	{ id: 3, value: Genres.BOOKS },
+	{ id: 4, value: Genres.CULINARY },
+	{ id: 5, value: Genres.DIY_KITS },
+	{ id: 6, value: Genres.TRAVEL_KITS },
 ];
 
 export const REGION_CHOICES = [
@@ -80,6 +176,7 @@ export const INTERESTS_FILTER = [
 	{ id: 1, value: Interests.CULINARY },
 	{ id: 2, value: Interests.RECREATION },
 	{ id: 3, value: Interests.ARTS },
+	{ id: 4, value: Interests.THEME_PARK },
 ];
 
 const reverseString = (str: string) => {

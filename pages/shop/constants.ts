@@ -1,5 +1,4 @@
-import { Genres, Providers } from "../../constants";
-
+import { Genres } from "../../constants";
 import { ProductCardProps } from "../../components/ProductCard/constants";
 
 export const PRODUCTS: ProductCardProps[] = [

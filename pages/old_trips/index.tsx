@@ -1,52 +1,57 @@
-import { FC, useContext, useEffect, useState } from "react";
 import {
-	GENRES,
-	Genres,
+	BookingsType,
+	INTERESTS_FILTER,
+	Interests,
+	REGION_CHOICES,
+	Regions,
 	SORT_FILTER,
 	Sorts,
 	ToNumberFormat,
 	ToRupiahFormat,
-	To_Genres,
+	To_Interest,
+	To_Region,
 	To_Sort,
 	split,
 } from "../../constants";
+import { FC, useContext, useEffect, useState } from "react";
 
+import { BOOKINGS } from "./constants";
+import BookingCard from "../../components/BookingCard";
 import Button from "../../components/Button/Button";
 import { Carousel } from "react-responsive-carousel";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
-import { PRODUCTS } from "./constants";
 import Popup from "./components/popup";
-import ProductCard from "../../components/ProductCard";
-import { ProductCardProps } from "../../components/ProductCard/constants";
 import Select from "../../components/Select/Select";
 import SelectChecklist from "../../components/Select/SelectChecklist";
+import TripsCard from "../../components/TripsCard";
 import { useRouter } from "next/router";
 import { useWindowSize } from "../../hooks/useWindowSize";
 
-const Shop: FC = () => {
+const Trips: FC = () => {
 	return (
 		<div className="flex flex-col">
-			<LandingCard />
-			<ProductsDisplay />
+			<TripsDisplay />
+			<TripsCard />
 		</div>
 	);
 };
 
-const ProductsDisplay: FC = () => {
+const TripsDisplay: FC = () => {
 	const [columns, setColumns] = useState<number>(1);
 	const [filter, setFilter] = useState<string>("");
 	const [minPriceFilter, setMinPriceFilter] = useState<string>("");
 	const [maxPriceFilter, setMaxPriceFilter] = useState<string>("");
+	const [regionFilter, setRegionFilter] = useState<Regions>(Regions.ALL);
 	const [sortFilter, setSortFilter] = useState<Sorts>(Sorts.MOST_POPULAR);
-	const [genresFilter, setGenresFilter] = useState<Genres[]>([]);
-	const [productsLists, setProductsLists] = useState<
-		{ id: number; value: ProductCardProps[] }[]
+	const [interestsFilter, setInterestsFilter] = useState<Interests[]>([]);
+	const [bookingsLists, setBookingsLists] = useState<
+		{ id: number; value: BookingsType[] }[]
 	>([]);
 	const [showFilterBar, setShowFilterBar] = useState<boolean>(false);
 	const windowSize = useWindowSize();
 	const router = useRouter();
-	const { genres, sort } = router.query;
+	const { region, interest, sort } = router.query;
 
 	const filters = {
 		filter,
@@ -55,46 +60,13 @@ const ProductsDisplay: FC = () => {
 		setMinPriceFilter,
 		maxPriceFilter,
 		setMaxPriceFilter,
+		regionFilter,
+		setRegionFilter,
 		sortFilter,
 		setSortFilter,
-		genresFilter,
-		setGenresFilter,
+		interestsFilter,
+		setInterestsFilter,
 	};
-
-	useEffect(() => {
-		if (!router.isReady) return;
-		if (genres) {
-			if (Array.isArray(genres)) {
-				setGenresFilter(genres.map((g) => To_Genres[g]));
-			} else {
-				setGenresFilter([To_Genres[genres]]);
-			}
-		}
-		if (sort) {
-			const Sort: string = Array.isArray(sort) ? sort[0] : sort;
-			setSortFilter(To_Sort[Sort]);
-		}
-	}, [router.isReady]);
-
-	useEffect(() => {
-		if (!router.isReady) return;
-		router.replace({
-			query: {
-				...router.query,
-				genres: genresFilter,
-			},
-		});
-	}, [genresFilter, router.isReady]);
-
-	useEffect(() => {
-		if (!router.isReady) return;
-		router.replace({
-			query: {
-				...router.query,
-				sort: sortFilter,
-			},
-		});
-	}, [sortFilter, router.isReady]);
 
 	useEffect(() => {
 		if ((windowSize.width ?? 0) >= 1400) {
@@ -111,28 +83,82 @@ const ProductsDisplay: FC = () => {
 	}, [windowSize]);
 
 	useEffect(() => {
-		let result = PRODUCTS;
+		if (!router.isReady) return;
+		if (region) {
+			const Region: string = Array.isArray(region) ? region[0] : region;
+			setRegionFilter(To_Region[Region]);
+		}
+		if (interest) {
+			if (Array.isArray(interest)) {
+				setInterestsFilter(interest.map((i) => To_Interest[i]));
+			} else {
+				setInterestsFilter([To_Interest[interest]]);
+			}
+		}
+		if (sort) {
+			const Sort: string = Array.isArray(sort) ? sort[0] : sort;
+			setSortFilter(To_Sort[Sort]);
+		}
+	}, [router.isReady]);
+
+	useEffect(() => {
+		if (!router.isReady) return;
+		router.replace({
+			query: {
+				...router.query,
+				interest: interestsFilter,
+			},
+		});
+	}, [interestsFilter, router.isReady]);
+
+	useEffect(() => {
+		if (!router.isReady) return;
+		router.replace({
+			query: {
+				...router.query,
+				region: regionFilter,
+			},
+		});
+	}, [regionFilter, router.isReady]);
+
+	useEffect(() => {
+		if (!router.isReady) return;
+		router.replace({
+			query: {
+				...router.query,
+				sort: sortFilter,
+			},
+		});
+	}, [sortFilter, router.isReady]);
+
+	useEffect(() => {
+		let result = BOOKINGS;
 
 		if (filter !== "") {
 			result = result.filter(
-				(product) => product.title.toLowerCase().indexOf(filter) !== -1
+				(booking) => booking.title.toLowerCase().indexOf(filter) !== -1
 			);
 		}
 
 		if (minPriceFilter !== "") {
 			result = result.filter(
-				(product) => product.price >= ToNumberFormat(minPriceFilter)
+				(booking) => booking.price >= ToNumberFormat(minPriceFilter)
 			);
 		}
 
 		if (maxPriceFilter !== "") {
 			result = result.filter(
-				(product) => product.price <= ToNumberFormat(maxPriceFilter)
+				(booking) => booking.price <= ToNumberFormat(maxPriceFilter)
 			);
 		}
 
-		result = result.filter((product) =>
-			genresFilter.every((e) => product.genres.includes(e))
+		result = result.filter(
+			(booking) =>
+				regionFilter === Regions.ALL || booking.region === regionFilter
+		);
+
+		result = result.filter((booking) =>
+			interestsFilter.every((e) => booking.categories.includes(e))
 		);
 
 		result.sort(function (a, b) {
@@ -147,18 +173,19 @@ const ProductsDisplay: FC = () => {
 			}
 		});
 
-		setProductsLists(split(result, columns * 2));
+		setBookingsLists(split(result, columns * 2));
 	}, [
 		filter,
 		minPriceFilter,
 		maxPriceFilter,
+		regionFilter,
 		sortFilter,
-		genresFilter,
+		interestsFilter,
 		columns,
 	]);
 
 	return (
-		<div className="relative mb-20">
+		<div className="relative">
 			<div className="absolute z-40 top-0 left-0">
 				<div className="relative w-72 h-40 lg:w-96 lg:h-60">
 					<Image
@@ -221,17 +248,17 @@ const ProductsDisplay: FC = () => {
 							showStatus={false}
 							showThumbs={false}
 						>
-							{productsLists.map((products) => (
+							{bookingsLists.map((bookings) => (
 								<div
-									key={products.id}
+									key={bookings.id}
 									className={`px-10 xl:px-14 2xl:px-20 py-10 grid gap-4 grid-rows-2 ${
 										columns === 1 && "grid-cols-1"
 									} ${columns === 2 && "grid-cols-2"} ${
 										columns === 3 && "grid-cols-3"
 									} ${columns === 4 && "grid-cols-4"}`}
 								>
-									{products.value.map((product) => (
-										<ProductCard key={product.id} {...product} />
+									{bookings.value.map((booking) => (
+										<BookingCard key={booking.id} {...booking} />
 									))}
 								</div>
 							))}
@@ -250,10 +277,12 @@ type FilterBarProps = {
 	setMinPriceFilter: Function;
 	maxPriceFilter: string;
 	setMaxPriceFilter: Function;
+	regionFilter: Regions;
+	setRegionFilter: Function;
 	sortFilter: Sorts;
 	setSortFilter: Function;
-	genresFilter: Genres[];
-	setGenresFilter: Function;
+	interestsFilter: Interests[];
+	setInterestsFilter: Function;
 	columns: number;
 	popup?: boolean | undefined;
 };
@@ -265,10 +294,12 @@ const FilterBar: FC<FilterBarProps> = ({
 	setMinPriceFilter,
 	maxPriceFilter,
 	setMaxPriceFilter,
+	regionFilter,
+	setRegionFilter,
 	sortFilter,
 	setSortFilter,
-	genresFilter,
-	setGenresFilter,
+	interestsFilter,
+	setInterestsFilter,
 	columns,
 	popup,
 }) => {
@@ -286,7 +317,7 @@ const FilterBar: FC<FilterBarProps> = ({
 		>
 			<div className="flex flex-col gap-y-5 p-5 py-7">
 				<h1 className="ml-2 font-semibold">
-					{indo ? "Cari produk yang Anda mau" : "Find your favorite products"}
+					{indo ? "Cari tujuan Anda" : "Look for your next destination"}
 				</h1>
 				<div className="flex flex-row rounded-3xl border-2 border-selectBorder/50">
 					<input
@@ -354,16 +385,29 @@ const FilterBar: FC<FilterBarProps> = ({
 				</div>
 			</div>
 			<div className="p-5 py-7">
+				<Select
+					label={
+						<h1 className="ml-2 font-semibold">
+							{indo ? "Filter berdasarkan daerah" : "Filter by regions"}
+						</h1>
+					}
+					selected={regionFilter}
+					setSelected={setRegionFilter}
+					options={REGION_CHOICES}
+					fit={true}
+				/>
+			</div>
+			<div className="p-5 py-7">
 				<SelectChecklist
 					label={
 						<h1 className="ml-2 font-semibold">
-							{indo ? "Filter berdasarkan kategori" : "Filter by Genres"}
+							{indo ? "Filter berdasarkan kategori" : "Filter by interest"}
 						</h1>
 					}
 					placeholder="Anything"
-					selected={genresFilter}
-					setSelected={setGenresFilter}
-					options={GENRES}
+					selected={interestsFilter}
+					setSelected={setInterestsFilter}
+					options={INTERESTS_FILTER}
 					fit={true}
 				/>
 			</div>
@@ -384,38 +428,35 @@ const FilterBar: FC<FilterBarProps> = ({
 	);
 };
 
-const LandingCard: FC = () => {
-	const router = useRouter();
+const LandingCard = () => {
 	const indo = useContext(IndoContext);
 
 	return (
 		<div className="relative w-full flex flex-row justify-end overflow-hidden h-screen text-white">
-			<div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-black/10" />
+			<div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-black/20" />
 			<div className="relative w-full h-full">
 				<Image
-					src="/shop/landing.png"
+					src="/trips/bromo.jpeg"
 					layout="fill"
 					objectFit="cover"
-					objectPosition="bottom"
-					alt="Landing Card"
+					objectPosition="top"
+					alt="Homepage Image"
 				/>
 			</div>
-			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full flex flex-row items-center z-60">
-				<div className="w-full md:w-2/5 flex flex-col gap-y-10">
-					<h1 className="drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
-						{indo
-							? "Produk tradisional yang dibuat secara lokal"
-							: "Traditional craftsmanship for everyone"}
-					</h1>
-					<h1 className="drop-shadow-2xl font-ubuntu font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
-						{indo
-							? "Produk lokal tradisi turun-temurun"
-							: "The authentic locals’ intangible heritage"}
-					</h1>
-				</div>
+			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full md:w-2/5 flex flex-col gap-y-10 justify-center z-60">
+				<h1 className="drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
+					{indo
+						? "Rasakan Penjalanan yang Tidak Terlupakan"
+						: "Experience world-class trip with Us"}
+				</h1>
+				<h1 className="drop-shadow-2xl font-ubuntu font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
+					{indo
+						? ""
+						: "Pack your bag, set your sights, and get ready for a memorable trip"}
+				</h1>
 			</div>
 		</div>
 	);
 };
 
-export default Shop;
+export default Trips;

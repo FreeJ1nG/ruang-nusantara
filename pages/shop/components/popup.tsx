@@ -11,7 +11,7 @@ const Popup: FC<PopupType> = ({ children, showPopup, setShowPopup }) => {
 		if (showPopup) {
 			document.body.style.overflow = "hidden";
 		} else {
-			document.body.style.overflow = "scroll";
+			document.body.style.overflow = "auto";
 		}
 	}, [showPopup]);
 	const popupRef = useRef<HTMLDivElement>(null);

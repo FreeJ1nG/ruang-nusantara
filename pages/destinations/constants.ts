@@ -32,28 +32,9 @@ export type DestinationDetailType = {
 	address: string;
 	phone: string;
 	website: string;
-	hours?: string | undefined;
 	bestTimeToVisit?: { from: string; to: string } | undefined;
 	headlineTitle: string;
 	headlineContent: string;
-};
-
-export const To_Region: { [key: string]: Regions } = {
-	all: Regions.ALL,
-	bali: Regions.BALI,
-	java: Regions.JAVA,
-	kalimantan: Regions.KALIMANTAN,
-	sumatera: Regions.SUMATERA,
-	sulawesi: Regions.SULAWESI,
-	nusa_tenggara: Regions.NUSA_TENGGARA,
-	papua: Regions.PAPUA,
-};
-
-export const To_Interest: { [key: string]: Interests } = {
-	nature: Interests.NATURE,
-	culinary: Interests.CULINARY,
-	recreation: Interests.RECREATION,
-	arts: Interests.ARTS,
 };
 
 export const DESTINATIONS: DestinationType[] = [
@@ -155,7 +136,6 @@ export const DESTINATION_DETAIL: DestinationDetailType[] = [
 		address: "East Java",
 		phone: "(0341) 491828",
 		website: "bromotenggersemeru.org",
-		hours: "24 Hours",
 		bestTimeToVisit: { from: "July", to: "August" },
 		headlineTitle: "Witness the Greatest Beauty of Sunrise on Bromo.",
 		headlineContent: "Witness the Greatest Beauty of Sunrise on Bromo.",

@@ -5,13 +5,13 @@ import {
 	DESTINATION_DETAIL,
 	DestinationType,
 } from "../constants";
-import DestinationCard from "../../../components/DestinationCard";
 import { FC, useEffect, useState } from "react";
 
-import { BOOKINGS } from "../../trips/constants";
+import { BOOKINGS } from "../../old_trips/constants";
 import BookingCard from "../../../components/BookingCard";
 import Button from "../../../components/Button/Button";
 import { Carousel } from "react-responsive-carousel";
+import DestinationCard from "../../../components/DestinationCard";
 import Image from "next/image";
 import TertiaryButton from "../../../components/Button/TertiaryButton";
 import { split } from "../../../constants";
@@ -48,15 +48,21 @@ const Destination: FC = () => {
 	}, [windowSize]);
 
 	return (
-		<div className="flex flex-col gap-y-12 px-5 md:px-10 lg:px-32 xl:px-40 py-24 pt-32">
-			<Routes destination={destination} />
-			<ContentCard destination={destination} />
-			<AttractionsCard destination={destination} columns={attractionColumns} />
-			<BookingsCard destination={destination} columns={bookingColumns} />
-			<OtherDestinationsCard
-				destination={destination}
-				columns={bookingColumns}
-			/>
+		<div className="flex flex-col gap-y-12">
+			<div className="h-24 w-full bg-white"></div>
+			<div className="flex flex-col gap-y-12 px-5 md:px-10 lg:px-32 xl:px-40 pb-20">
+				<Routes destination={destination} />
+				<ContentCard destination={destination} />
+				<AttractionsCard
+					destination={destination}
+					columns={attractionColumns}
+				/>
+				<BookingsCard destination={destination} columns={bookingColumns} />
+				<OtherDestinationsCard
+					destination={destination}
+					columns={bookingColumns}
+				/>
+			</div>
 		</div>
 	);
 };
@@ -97,6 +103,7 @@ const OtherDestinationsCard: FC<PropsType> = ({ destination, columns }) => {
 					showStatus={false}
 					showIndicators={false}
 					showThumbs={false}
+					emulateTouch={true}
 				>
 					{destinationsLists.map((destinations) => {
 						return (
@@ -139,6 +146,7 @@ const BookingsCard: FC<PropsType> = ({ destination, columns }) => {
 					showStatus={false}
 					showIndicators={false}
 					showThumbs={false}
+					emulateTouch={true}
 				>
 					{bookingsLists.map((bookings) => {
 						return (
@@ -187,9 +195,9 @@ const AttractionsCard: FC<PropsType> = ({ destination, columns }) => {
 				<h1 className="font-bold text-3xl text-center sm:text-left">
 					Top Attractions
 				</h1>
-				<h1 className="text-gray4 text-sm text-center sm:text-left">
+				<h1 className="text-gray4 text-sm md:text-base xl:text-lg text-center sm:text-left">
 					These are our favorite local haunts, touristy spots, and hidden gems
-					near Bromo Tengger Semeru.
+					near {destination?.title}.
 				</h1>
 			</div>
 			<div className="flex flex-row justify-center sm:justify-start gap-x-4 lg:gap-x-10 text-xs lg:text-base">
@@ -231,6 +239,7 @@ const AttractionsCard: FC<PropsType> = ({ destination, columns }) => {
 					showIndicators={false}
 					showStatus={false}
 					showThumbs={false}
+					emulateTouch={true}
 					className="w-full"
 				>
 					{attractionsLists.map((attractions) => {
@@ -298,24 +307,27 @@ const ContentCard: FC<PropsType> = ({ destination }) => {
 
 	return (
 		<div className="flex flex-col gap-y-10">
-			<div className="flex flex-col">
+			{destination_detail?.brownText && (
+				<div className="font-bold text-white rounded-3xl bg-lightBrown py-1 w-40 text-center drop-shadow-lg font-ubuntu">
+					{destination_detail?.brownText}
+				</div>
+			)}
+			<div className="flex flex-col gap-y-2">
 				<h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wide">
 					{destination?.title}
 				</h1>
-				<h1 className="font-bold italic text-lightBrown">
-					{destination_detail?.brownText}
-				</h1>
-				<h1 className="italic">{destination_detail?.italicText}</h1>
+				<h1 className="italic text-lg">{destination_detail?.italicText}</h1>
 			</div>
-			<div className="smallcard flex flex-col md:flex-row gap-y-5 gap-x-10">
+			<div className="smallcard flex flex-col md:flex-row gap-y-5 gap-x-10 xl:gap-x-14 2xl:gap-x-20">
 				<Carousel
 					showStatus={false}
 					showThumbs={false}
+					emulateTouch={true}
 					className="w-full md:w-3/5 xl:w-[70%]"
 				>
 					{destination_detail?.imageSrcs.map((imageSrc) => {
 						return (
-							<div key={imageSrc.id} className="relative w-full h-[500px]">
+							<div key={imageSrc.id} className="relative w-full h-[600px]">
 								<Image
 									src={imageSrc.src}
 									alt={`Image of ${destination?.title}`}
@@ -327,65 +339,109 @@ const ContentCard: FC<PropsType> = ({ destination }) => {
 						);
 					})}
 				</Carousel>
-				<div className="flex flex-col gap-y-5 w-full md:w-2/5 xl:w-[30%]">
-					<h1 className="font-bold text-2xl tracking-wide text-center sm:text-left">
-						Details
-					</h1>
-					<div className="flex flex-col gap-y-2 tracking-wide">
-						{destination_detail?.address && (
-							<div className="flex">
-								<h1 className="w-20 text-gray2 font-medium">Address</h1>
-								<h1 className="">{destination_detail?.address}</h1>
-							</div>
-						)}
-						{destination_detail?.phone && (
-							<div className="flex">
-								<h1 className="w-20 text-gray2 font-medium">Phone</h1>
-								<button className="underline text-hyperlink">
-									{destination_detail?.phone}
-								</button>
-							</div>
-						)}
-						{destination_detail?.website && (
-							<div className="flex">
-								<h1 className="w-20 text-gray2 font-medium">Website</h1>
-								<button className="underline text-hyperlink">
-									{destination_detail.website}
-								</button>
-							</div>
-						)}
-						{destination_detail?.hours && (
-							<div className="flex">
-								<h1 className="w-20 text-gray2 font-medium">Hours</h1>
-								<h1 className="">{destination_detail?.hours}</h1>
-							</div>
-						)}
+				<div className="relative flex flex-col justify-center gap-y-10 w-full md:w-2/5 xl:w-[30%] shadow-2xl py-10 px-14 rounded-3xl bg-white">
+					<div className="absolute w-60 h-32 right-0 top-4">
+						<div className="relative z-40 w-full h-full">
+							<Image src="/megamendung2.png" alt="MegaMendung" layout="fill" />
+						</div>
+					</div>
+					<div className="z-50 flex flex-col gap-y-5">
+						<h1 className="font-bold text-2xl xl:text-3xl tracking-wide text-left">
+							Details
+						</h1>
+						<div className="flex flex-col gap-y-4 tracking-wide">
+							{destination_detail?.address && (
+								<div className="flex items-center gap-x-5">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth={2}
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+										/>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+										/>
+									</svg>
+									<h1 className="text-lg">{destination_detail?.address}</h1>
+								</div>
+							)}
+							{destination_detail?.phone && (
+								<div className="flex items-center gap-x-5">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth={2}
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+										/>
+									</svg>
+									<button className="underline text-hyperlink text-lg">
+										{destination_detail?.phone}
+									</button>
+								</div>
+							)}
+							{destination_detail?.website && (
+								<div className="flex items-center gap-x-5">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth={2}
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+										/>
+									</svg>
+									<button className="underline text-hyperlink text-lg">
+										{destination_detail.website}
+									</button>
+								</div>
+							)}
+						</div>
 					</div>
 					<div className="flex flex-col gap-y-3">
-						<h1 className="font-bold text-2xl tracking-wide text-center sm:text-left">
+						<h1 className="font-bold text-2xl xl:text-3xl tracking-wide text-left">
 							Best time to visit
 						</h1>
-						<h1 className="text-center sm:text-left">
+						<h1 className="text-left text-lg">
 							{destination_detail?.bestTimeToVisit?.from} -{" "}
 							{destination_detail?.bestTimeToVisit?.to}
 						</h1>
 					</div>
-					<div className="flex justify-center sm:justify-start">
-						<Button
-							label="BOOK NOW"
-							type="secondary"
-							width={200}
-							height={50}
-							onClick={() => router.push("/")}
-						/>
-					</div>
+					<Button
+						label="BOOK NOW"
+						type="primary"
+						rounded="xl"
+						height={50}
+						fit={true}
+						onClick={() => router.push("/")}
+					/>
 				</div>
 			</div>
-			<div className="flex flex-col gap-y-5 mt-5">
-				<h1 className="tracking-wide font-medium text-2xl text-center sm:text-left">
-					{destination_detail?.headlineTitle}
+			<div className="flex flex-col gap-y-5 my-5 mb-10 xl:mb-20">
+				<h1 className="font-bold text-3xl text-center sm:text-left">
+					Overview
 				</h1>
-				<h1 className="text-sm text-center sm:text-left">
+				<h1 className="text-sm md:text-base xl:text-lg text-center sm:text-left">
 					{destination_detail?.headlineContent}
 				</h1>
 			</div>
@@ -404,7 +460,12 @@ const Routes: FC<PropsType> = ({ destination }) => {
 						{destination?.region ?? "NOT FOUND"}
 					</div>
 				}
-				onClick={() => router.push("/destinations")}
+				onClick={() =>
+					router.push({
+						pathname: "/destinations",
+						query: { region: destination?.region },
+					})
+				}
 			/>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -422,7 +483,15 @@ const Routes: FC<PropsType> = ({ destination }) => {
 						{destination?.categories[0] ?? "NOT FOUND"}
 					</div>
 				}
-				onClick={() => router.push("/destinations")}
+				onClick={() =>
+					router.push({
+						pathname: "/destinations",
+						query: {
+							region: destination?.region,
+							interest: destination?.categories[0],
+						},
+					})
+				}
 			/>
 		</div>
 	);

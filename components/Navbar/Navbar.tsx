@@ -1,6 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
 
-import { BLACK_TEXT } from "./constants";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
 import Link from "next/link";
@@ -19,14 +18,9 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 
 	return (
 		<div
-			className={`${
-				BLACK_TEXT.filter(
-					(route: string) =>
-						router.pathname.includes(route) && route !== router.pathname
-				).length > 0
-					? "text-black"
-					: "text-white"
-			} `}
+			className={`font-ubuntu ${
+				router.pathname === "/" ? "text-white" : "text-black"
+			}`}
 		>
 			<Popup showPopup={showMenu} setShowPopup={setShowMenu}>
 				<div className="w-full h-full p-10 flex flex-col gap-y-5">
@@ -35,7 +29,13 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 					))}
 				</div>
 			</Popup>
-			<div className="z-90 absolute top-0 left-0 right-0 flex flex-row justify-between items-center px-5 md:px-10 xl:px-20 h-24 bg-transparent">
+			<div
+				className={`z-100 flex flex-row justify-between items-center px-5 md:px-10 xl:px-20 h-20 ${
+					router.pathname === "/"
+						? "bg-transparent absolute top-0 left-0 right-0"
+						: "bg-white relative"
+				}`}
+			>
 				<Link href="/">
 					<a className="flex flex-row items-center gap-x-2 md:gap-x-5">
 						<div className="relative w-10 h-10 md:w-14 md:h-14">
@@ -146,7 +146,7 @@ const MenuElement: FC<MenuElementPropType> = ({
 			}}
 		>
 			<h1
-				className={`drop-shadow-2xl text-left lg:text-center font-poppins font-semibold text-base xl:text-lg px-4 py-1 rounded-full transition-all duration-300 ${
+				className={`drop-shadow-2xl text-left lg:text-center font-semibold text-base xl:text-lg px-4 py-1 rounded-full transition-all duration-300 ${
 					where !== "/" &&
 					(router.pathname.includes(where)
 						? "bg-lightBrown text-white"

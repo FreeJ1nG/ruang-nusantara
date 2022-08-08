@@ -1,7 +1,5 @@
 import { FC, ReactNode } from "react";
 
-import toast from "react-hot-toast";
-
 type ButtonProps = {
 	onClick: Function;
 	width?: number | undefined;
@@ -13,6 +11,7 @@ type ButtonProps = {
 	disabled?: boolean | undefined;
 	mt?: number | undefined;
 	mb?: number | undefined;
+	rounded?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | undefined;
 	type: "primary" | "secondary";
 };
 
@@ -27,8 +26,15 @@ const Button: FC<ButtonProps> = ({
 	disabled,
 	mt,
 	mb,
+	rounded,
 	type,
 }) => {
+	const roundedClassName = `${rounded === "sm" && "rounded-sm"} ${
+		rounded === "md" && "rounded-md"
+	} ${rounded === "lg" && "rounded-lg"} ${rounded === "xl" && "rounded-xl"} ${
+		rounded === "2xl" && "rounded-2xl"
+	} ${rounded === "3xl" || (rounded === undefined && "rounded-3xl")}`;
+
 	return (
 		<button
 			onClick={() => {
@@ -43,14 +49,14 @@ const Button: FC<ButtonProps> = ({
 				width: JSON.stringify(width) + "px",
 			}}
 			disabled={disabled}
-			className={`group relative flex flex-row gap-x-5 items-center justify-center rounded-3xl ${
+			className={`${roundedClassName} group relative flex flex-row gap-x-5 items-center justify-center ${
 				fit && "w-full h-full"
 			}`}
 		>
 			<div
 				className={`${type === "primary" && "bg-lightBrown"} ${
 					type === "secondary" && "bg-white border-2 border-lightBrown/60"
-				} absolute top-0 left-0 right-0 bottom-0 rounded-3xl overflow-hidden flex flex-row`}
+				} absolute top-0 left-0 right-0 bottom-0 ${roundedClassName} overflow-hidden flex flex-row`}
 			>
 				<div
 					className={`transition-all duration-500 w-0 group-hover:w-full ${
