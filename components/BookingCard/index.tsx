@@ -1,4 +1,4 @@
-import { Interests, Regions, ToRupiahFormat } from "../../constants";
+import { Interests, Regions, ToRupiahFormat } from "../../constants/constants";
 
 import { FC } from "react";
 import Image from "next/image";
@@ -74,7 +74,8 @@ const BookingCard: FC<BookingCardProps> = ({
 							</svg>
 							{rating}
 						</div>
-						<h1>({reviews} reviews)</h1>
+						<h1>|</h1>
+						<h1>{reviews} reviews</h1>
 					</div>
 					<h1 className="text-xs">{`${days} Day${days > 1 && "s"} ${
 						days === 1 ? "" : days - 1

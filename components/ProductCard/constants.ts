@@ -1,4 +1,4 @@
-import { Genres } from "../../constants";
+import { Genres } from "../../constants/constants";
 
 export type ProductCardProps = {
 	id?: number | undefined;

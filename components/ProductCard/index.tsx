@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { ProductCardProps } from "./constants";
-import { ToRupiahFormat } from "../../constants";
+import { ToRupiahFormat } from "../../constants/constants";
 
 const ProductCard: FC<ProductCardProps> = ({
 	title,
