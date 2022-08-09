@@ -4,6 +4,7 @@ export enum Interests {
 	RECREATION = "Recreation and Leisure",
 	ARTS = "Arts, Culture, and Heritage",
 	THEME_PARK = "Theme Park",
+	EVERYTHING = "A bit of everything",
 }
 
 export const To_Interest: { [key: string]: Interests } = {
@@ -12,6 +13,7 @@ export const To_Interest: { [key: string]: Interests } = {
 	"Recreation and Leisure": Interests.RECREATION,
 	"Arts, Culture, and Heritage": Interests.ARTS,
 	"Theme Park": Interests.THEME_PARK,
+	"A bit of everything": Interests.EVERYTHING,
 };
 
 export const INTERESTS_CARDS: {
@@ -68,6 +70,21 @@ export enum Months {
 	November = "Nov",
 	December = "Dec",
 }
+
+export const Month_Index: { [key: string]: number } = {
+	[Months.January]: 0,
+	[Months.February]: 1,
+	[Months.March]: 2,
+	[Months.April]: 3,
+	[Months.May]: 4,
+	[Months.June]: 5,
+	[Months.July]: 6,
+	[Months.August]: 7,
+	[Months.September]: 8,
+	[Months.October]: 9,
+	[Months.November]: 10,
+	[Months.December]: 11,
+};
 
 export const To_Month: { [key: number]: Months } = {
 	0: Months.January,

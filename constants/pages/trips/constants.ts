@@ -11,6 +11,105 @@ import {
 
 import { ReactNode } from "react";
 
+export const DURATION_CARDS: {
+	id: number;
+	imageSrc: string;
+	from: number;
+	to: number;
+	start_from: string;
+}[] = [
+	{
+		id: 0,
+		imageSrc: "/trips/2-3days.png",
+		from: 2,
+		to: 3,
+		start_from: "129",
+	},
+	{
+		id: 1,
+		imageSrc: "/trips/4-6days.png",
+		from: 4,
+		to: 6,
+		start_from: "219",
+	},
+	{
+		id: 2,
+		imageSrc: "/trips/7-8days.png",
+		from: 7,
+		to: 8,
+		start_from: "379",
+	},
+	{
+		id: 3,
+		imageSrc: "/trips/9-11days.png",
+		from: 9,
+		to: 11,
+		start_from: "529",
+	},
+];
+
+export const TRAVEL_TYPE_CARDS: {
+	id: number;
+	imageSrc: string;
+	type: TravelType;
+}[] = [
+	{ id: 0, imageSrc: "/trips/couple.png", type: TravelType.COUPLE },
+	{ id: 1, imageSrc: "/trips/family.png", type: TravelType.FAMILY },
+	{ id: 2, imageSrc: "/trips/friends.png", type: TravelType.FRIENDS },
+	{ id: 3, imageSrc: "/trips/solo.png", type: TravelType.SOLO },
+];
+
+export const ADDON_CARDS: { id: number; imageSrc: string; addon: Addons }[] = [
+	{ id: 0, imageSrc: "/trips/tour_guides.jpeg", addon: Addons.TOUR_GUIDES },
+	{ id: 1, imageSrc: "/trips/elderly.png", addon: Addons.ELDERLY },
+	{ id: 2, imageSrc: "/trips/vegan.png", addon: Addons.VEGAN },
+	{ id: 3, imageSrc: "/trips/kids.png", addon: Addons.KIDS },
+];
+
+export const INTEREST_CARDS: {
+	id: number;
+	imageSrc: string;
+	title: string;
+	interest: Interests;
+}[] = [
+	{
+		id: 0,
+		imageSrc: "/trips/arts.png",
+		title: "Art & Culture",
+		interest: Interests.ARTS,
+	},
+	{
+		id: 1,
+		imageSrc: "/trips/nature.png",
+		title: "Nature & Wildlife",
+		interest: Interests.NATURE,
+	},
+	{
+		id: 2,
+		imageSrc: "/trips/culinary.png",
+		title: "Culinary",
+		interest: Interests.CULINARY,
+	},
+	{
+		id: 3,
+		imageSrc: "/trips/leisure.png",
+		title: "Recreation & Leisure",
+		interest: Interests.RECREATION,
+	},
+	{
+		id: 4,
+		imageSrc: "/trips/theme_park.png",
+		title: "Theme Park",
+		interest: Interests.THEME_PARK,
+	},
+	{
+		id: 5,
+		imageSrc: "/trips/no_particular.png",
+		title: "A bit of everything",
+		interest: Interests.EVERYTHING,
+	},
+];
+
 export type MonthCardType = {
 	month: Months;
 	recommend: Recommendations;
