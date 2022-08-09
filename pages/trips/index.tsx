@@ -1,31 +1,19 @@
 import { DatasType, TripStage } from "../../constants/pages/trips/constants";
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, useState } from "react";
 
+import AddonsForm from "./components/AddonsForm";
 import CalendarForm from "./components/CalendarForm";
 import Container from "./components/Container";
+import DurationForm from "./components/DurationForm";
+import InterestsForm from "./components/InterestsForm";
 import LandingCard from "./components/LandingCard";
 import MapCard from "./components/MapCard";
 import MonthForm from "./components/MonthForm";
-import { useLocalstorageState } from "rooks";
+import TravelWithForm from "./components/TravelWithForm";
 
 const Trips: FC = () => {
-	const [storedStage, setStoredStage] = useLocalstorageState<TripStage>(
-		"trip:stage",
-		TripStage.HOMEPAGE
-	);
 	const [stage, setStage] = useState<TripStage>(TripStage.HOMEPAGE);
-	useEffect(() => {
-		setStage(storedStage);
-	}, [storedStage]);
-	const [component, setComponent] = useState<ReactNode>(null);
-	const [datas, setDatas] = useLocalstorageState<DatasType>("trip:datas", {});
-	console.log(datas);
-	console.log(stage);
-
-	// useEffect(() => {
-	// 	setStage(TripStage.HOMEPAGE);
-	// 	setDatas({});
-	// }, [setDatas]);
+	const [datas, setDatas] = useState<DatasType>({});
 
 	const props = {
 		stage,
@@ -54,25 +42,25 @@ const Trips: FC = () => {
 		case TripStage.DURATION:
 			return (
 				<Container {...props}>
-					<MonthForm {...props} />
+					<DurationForm {...props} />
 				</Container>
 			);
 		case TripStage.WHO:
 			return (
 				<Container {...props}>
-					<MonthForm {...props} />
+					<TravelWithForm {...props} />
 				</Container>
 			);
 		case TripStage.INTERESTS:
 			return (
 				<Container {...props}>
-					<MonthForm {...props} />
+					<InterestsForm {...props} />
 				</Container>
 			);
 		case TripStage.ADDONS:
 			return (
 				<Container {...props}>
-					<MonthForm {...props} />
+					<AddonsForm {...props} />
 				</Container>
 			);
 		case TripStage.CHECKOUT:

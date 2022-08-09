@@ -18,7 +18,7 @@ const Container: FC<PropsType> = ({
 		return (
 			<button
 				onClick={() => onClick()}
-				className="bg-white font-semibold text-gray8 hover:text-lightBrown rounded-lg border-2 border-gray7 hover:border-yellowText transition-all duration-300 px-6 py-2"
+				className="min-w-fit bg-white font-semibold text-gray8 hover:text-lightBrown rounded-lg border-2 border-gray7 hover:border-yellowText transition-all duration-300 px-6 py-2"
 			>
 				{label}
 			</button>
@@ -26,13 +26,13 @@ const Container: FC<PropsType> = ({
 	};
 
 	return (
-		<div className="flex justify-center">
-			<div className="flex flex-col my-20 w-[800px]">
-				<div className="flex flex-col gap-y-10">
-					<div className="px-10 flex flex-col gap-y-2">
+		<div className="w-full flex justify-center">
+			<div className="w-full flex flex-col gap-y-20 my-20">
+				<div className="px-5 sm:px-10 md:px-20 lg:px-40 xl:px-80 2xl:px-96 w-full flex flex-col gap-y-16">
+					<div className="px-10 w-full flex flex-col gap-y-2">
 						<h1 className="text-base font-medium">PLANNING YOUR TRIP TO</h1>
-						<div className="flex flex-row gap-x-5">
-							{datas.region && (
+						<div className="flex flex-row gap-x-5 overflow-auto">
+							{datas.region && stage > TripStage.MAP && (
 								<StageButton
 									label={datas.region}
 									onClick={() => {
@@ -41,18 +41,22 @@ const Container: FC<PropsType> = ({
 									}}
 								/>
 							)}
-							{datas.month && datas.departure_date && (
-								<StageButton
-									label={
-										JSON.stringify(datas.departure_date.getDate()) + datas.month
-									}
-									onClick={() => {
-										setDatas({ region: datas.region });
-										setStage(TripStage.WHEN_MONTH);
-									}}
-								/>
-							)}
-							{datas.duration && (
+							{datas.month &&
+								datas.departure_date &&
+								stage > TripStage.WHEN_CALENDAR && (
+									<StageButton
+										label={
+											datas.month +
+											" " +
+											JSON.stringify(datas.departure_date.getDate())
+										}
+										onClick={() => {
+											setDatas({ region: datas.region });
+											setStage(TripStage.WHEN_MONTH);
+										}}
+									/>
+								)}
+							{datas.duration && stage > TripStage.DURATION && (
 								<StageButton
 									label={`${datas.duration.from}-${datas.duration.to} days`}
 									onClick={() => {
@@ -65,7 +69,7 @@ const Container: FC<PropsType> = ({
 									}}
 								/>
 							)}
-							{datas.travel_type && (
+							{datas.travel_type && stage > TripStage.WHO && (
 								<StageButton
 									label={datas.travel_type}
 									onClick={() => {
@@ -79,11 +83,13 @@ const Container: FC<PropsType> = ({
 									}}
 								/>
 							)}
-							{datas.interests && (
+							{datas.interests && stage > TripStage.INTERESTS && (
 								<StageButton
-									label={`${datas.interests[0]} +${
-										datas.interests.length > 1 && datas.interests.length - 1
-									}`}
+									label={
+										datas.interests.length > 1
+											? `${datas.interests[0]}  +${datas.interests.length - 1}`
+											: datas.interests[0]
+									}
 									onClick={() => {
 										setDatas({
 											region: datas.region,
@@ -135,8 +141,8 @@ const Container: FC<PropsType> = ({
 							></div>
 						</div>
 					</div>
-					<div className="flex justify-center">{children}</div>
 				</div>
+				<div className="flex justify-center">{children}</div>
 			</div>
 		</div>
 	);
