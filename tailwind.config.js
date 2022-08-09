@@ -50,11 +50,15 @@ module.exports = {
 				gray7: "#C0C0C0",
 				gray8: "#8B8B8B",
 
+				greenHover: "#4FAF7C",
+
 				orange: "#F56801",
 
 				productCardGray: "#A7A7A7",
 
 				hyperlink: "#215EFB",
+
+				startFrom: "#FFC100",
 			},
 			zIndex: {
 				5: "5",
