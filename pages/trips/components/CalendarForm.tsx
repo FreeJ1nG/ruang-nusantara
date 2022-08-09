@@ -9,8 +9,10 @@ import { useWindowSize } from "rooks";
 
 const CalendarForm: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 	const value: Date | null = datas.departure_date ?? null;
-	const month = Object.keys(Months).indexOf(datas?.month ?? Months.January);
 	const now = new Date();
+	if (Month_Index[datas?.month ?? To_Month[now.getMonth()]] < now.getMonth()) {
+		now.setFullYear(now.getFullYear() + 1);
+	}
 	now.setMonth(Month_Index[datas?.month ?? To_Month[now.getMonth()]]);
 	let defaultDate: Date | null = now;
 	const windowSize = useWindowSize();

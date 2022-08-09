@@ -18,7 +18,7 @@ const MonthForm: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 
 	return (
 		<div className="flex flex-col gap-y-14 items-center">
-			<h1 className="text-2xl font-medium">When is your departure</h1>
+			<h1 className="text-3xl font-semibold">When is your departure?</h1>
 			<div className="grid grid-rows-6 grid-cols-1 sm:grid-rows-2 sm:grid-cols-3 gap-10">
 				{months.map((month) => (
 					<MonthCard

@@ -35,8 +35,8 @@ const DurationCard: FC<{
 				<div className="font-medium text-2xl">{`${from}-${to} days`}</div>
 				<div className="flex flex-row gap-x-4 items-center">
 					<div className="flex flex-col text-footerText text-sm">
-						<h1>START</h1>
-						<h1>FROM</h1>
+						<h1 className="text-xs">START</h1>
+						<h1 className="text-xs">FROM</h1>
 					</div>
 					<h1 className="text-startFrom text-2xl">${start_from}</h1>
 				</div>

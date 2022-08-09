@@ -1,5 +1,5 @@
 import { DatasType, TripStage } from "../../constants/pages/trips/constants";
-import { FC, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 
 import AddonsForm from "./components/AddonsForm";
 import CalendarForm from "./components/CalendarForm";
@@ -22,56 +22,72 @@ const Trips: FC = () => {
 		setDatas,
 	};
 
+	let component: ReactNode = null;
+
 	switch (+stage) {
 		case TripStage.HOMEPAGE:
-			return <LandingCard {...props} />;
+			component = <LandingCard {...props} />;
+			break;
 		case TripStage.MAP:
-			return <MapCard {...props} />;
+			component = <MapCard {...props} />;
+			break;
 		case TripStage.WHEN_MONTH:
-			return (
+			component = (
 				<Container {...props}>
 					<MonthForm {...props} />
 				</Container>
 			);
+			break;
 		case TripStage.WHEN_CALENDAR:
-			return (
+			component = (
 				<Container {...props}>
 					<CalendarForm {...props} />
 				</Container>
 			);
+			break;
 		case TripStage.DURATION:
-			return (
+			component = (
 				<Container {...props}>
 					<DurationForm {...props} />
 				</Container>
 			);
+			break;
 		case TripStage.WHO:
-			return (
+			component = (
 				<Container {...props}>
 					<TravelWithForm {...props} />
 				</Container>
 			);
+			break;
 		case TripStage.INTERESTS:
-			return (
+			component = (
 				<Container {...props}>
 					<InterestsForm {...props} />
 				</Container>
 			);
+			break;
 		case TripStage.ADDONS:
-			return (
+			component = (
 				<Container {...props}>
 					<AddonsForm {...props} />
 				</Container>
 			);
+			break;
 		case TripStage.CHECKOUT:
-			return (
+			component = (
 				<Container {...props}>
 					<MonthForm {...props} />
 				</Container>
 			);
+			break;
 		default:
-			return null;
+			component = null;
+			break;
 	}
+
+	console.log(component);
+
+	return <div className="mb-10 md:mb-20 xl:mb-40">{component}</div>;
 };
 
 export default Trips;
