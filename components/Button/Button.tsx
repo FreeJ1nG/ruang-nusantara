@@ -49,7 +49,7 @@ const Button: FC<ButtonProps> = ({
 				width: JSON.stringify(width) + "px",
 			}}
 			disabled={disabled}
-			className={`${roundedClassName} group relative flex flex-row gap-x-5 items-center justify-center ${
+			className={`${roundedClassName} disabled:cursor-not-allowed group relative flex flex-row gap-x-5 items-center justify-center ${
 				fit && "w-full h-full"
 			}`}
 		>
