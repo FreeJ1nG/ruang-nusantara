@@ -1,4 +1,4 @@
-import { DatasType, TripStage } from "./constants";
+import { DatasType, TripStage } from "../../constants/pages/trips/constants";
 import { FC, ReactNode, useEffect, useState } from "react";
 
 import CalendarForm from "./components/CalendarForm";

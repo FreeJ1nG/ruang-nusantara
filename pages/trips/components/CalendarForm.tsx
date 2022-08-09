@@ -1,4 +1,4 @@
-import { PropsType, TripStage } from "../constants";
+import { PropsType, TripStage } from "../../../constants/pages/trips/constants";
 
 import Button from "../../../components/Button/Button";
 import { FC } from "react";
