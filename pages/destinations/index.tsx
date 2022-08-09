@@ -4,12 +4,12 @@ import {
 	REGION_CHOICES,
 	To_Interest,
 	To_Region,
-} from "../../constants";
-import { Interests, Regions } from "../../constants";
+} from "../../constants/constants";
+import { Interests, Regions } from "../../constants/constants";
 
 import CardWithImage from "../../components/CardWithImage/index";
 import { Carousel } from "react-responsive-carousel";
-import { DESTINATIONS } from "./constants";
+import { DESTINATIONS } from "../../constants/pages/destinations/constants";
 import DestinationCard from "../../components/DestinationCard/index";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
@@ -17,7 +17,7 @@ import RegionSelect from "../../components/Select/RegionSelect";
 import Select from "../../components/Select/Select";
 import SelectChecklist from "../../components/Select/SelectChecklist";
 import TripsCard from "../../components/TripsCard/index";
-import { split } from "../../constants";
+import { split } from "../../constants/constants";
 import { useRouter } from "next/router";
 import { useWindowSize } from "../../hooks/useWindowSize";
 
@@ -216,12 +216,12 @@ const LandingCard: FC<PropTypes> = ({ indo }) => {
 			</div>
 			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full flex flex-row items-center z-60">
 				<div className="w-full md:w-2/5 flex flex-col gap-y-10">
-					<h1 className="drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
+					<h1 className="font-ubuntu drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
 						{indo
 							? "Jelajahi Indonesia!"
 							: "Explore different regions of Indonesia!"}
 					</h1>
-					<h1 className="drop-shadow-2xl font-ubuntu font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
+					<h1 className="drop-shadow-2xl font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
 						{indo
 							? "Jelajahi 5300 jenis makanan, 2775 atraksi, 64 baju tradisional dan kriya. Nawasena!"
 							: "Every place has a story, every trip is unforgettable"}

@@ -1,4 +1,4 @@
-import { Interests, Regions, ToRupiahFormat } from "../../constants";
+import { Interests, Regions, ToRupiahFormat } from "../../constants/constants";
 
 import { FC } from "react";
 import Image from "next/image";

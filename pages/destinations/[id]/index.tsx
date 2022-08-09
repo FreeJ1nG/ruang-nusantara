@@ -4,17 +4,17 @@ import {
 	DESTINATIONS,
 	DESTINATION_DETAIL,
 	DestinationType,
-} from "../constants";
+} from "../../../constants/pages/destinations/constants";
 import { FC, useEffect, useState } from "react";
 
-import { BOOKINGS } from "../../old_trips/constants";
+import { BOOKINGS } from "../../../constants/pages/trips/constants";
 import BookingCard from "../../../components/BookingCard";
 import Button from "../../../components/Button/Button";
 import { Carousel } from "react-responsive-carousel";
 import DestinationCard from "../../../components/DestinationCard";
 import Image from "next/image";
 import TertiaryButton from "../../../components/Button/TertiaryButton";
-import { split } from "../../../constants";
+import { split } from "../../../constants/constants";
 import { useRouter } from "next/router";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 
@@ -76,7 +76,7 @@ const OtherDestinationsCard: FC<PropsType> = ({ destination, columns }) => {
 	const [destinationsLists, setDestinationsLists] = useState(
 		split(
 			DESTINATIONS.filter(
-				(d) => d.region === destination?.region && d.id !== destination.id
+				(d) => d.region === destination?.region && d.id !== destination?.id
 			),
 			columns ?? 1
 		)
@@ -85,7 +85,7 @@ const OtherDestinationsCard: FC<PropsType> = ({ destination, columns }) => {
 		setDestinationsLists(
 			split(
 				DESTINATIONS.filter(
-					(d) => d.region === destination?.region && d.id !== destination.id
+					(d) => d.region === destination?.region && d.id !== destination?.id
 				),
 				columns ?? 1
 			)
@@ -308,7 +308,7 @@ const ContentCard: FC<PropsType> = ({ destination }) => {
 	return (
 		<div className="flex flex-col gap-y-10">
 			{destination_detail?.brownText && (
-				<div className="font-bold text-white rounded-3xl bg-lightBrown py-1 w-40 text-center drop-shadow-lg font-ubuntu">
+				<div className="font-bold text-white rounded-3xl bg-lightBrown py-1 w-40 text-center drop-shadow-lg">
 					{destination_detail?.brownText}
 				</div>
 			)}

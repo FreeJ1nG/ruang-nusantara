@@ -1,4 +1,4 @@
-import { Interests } from "../../constants";
+import { Interests } from "../../constants/constants";
 
 export type StoryProps = {
 	id: number;

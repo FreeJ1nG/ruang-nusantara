@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import { Carousel } from "react-responsive-carousel";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
-import { split } from "../../constants";
+import { split } from "../../constants/constants";
 import { useRouter } from "next/router";
 import { useWindowSize } from "../../hooks/useWindowSize";
 

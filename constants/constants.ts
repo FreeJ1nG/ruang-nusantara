@@ -47,6 +47,13 @@ export const INTERESTS_CARDS: {
 	},
 ];
 
+export enum Recommendations {
+	OFF_SEASON = "OFF SEASON",
+	SECOND_BEST = "SECOND BEST",
+	TOO_CROWDED = "TOO CROWDED",
+	OUR_PICK = "OUR PICK",
+}
+
 export enum Months {
 	January = "Jan",
 	February = "Feb",
@@ -61,6 +68,21 @@ export enum Months {
 	November = "Nov",
 	December = "Dec",
 }
+
+export const To_Month: { [key: number]: Months } = {
+	0: Months.January,
+	1: Months.February,
+	2: Months.March,
+	3: Months.April,
+	4: Months.May,
+	5: Months.June,
+	6: Months.July,
+	7: Months.August,
+	8: Months.September,
+	9: Months.October,
+	10: Months.November,
+	11: Months.December,
+};
 
 export enum Addons {
 	TOUR_GUIDES = "Tour Guides",

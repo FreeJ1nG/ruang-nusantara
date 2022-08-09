@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import { Interests } from "../../constants";
+import { Interests } from "../../constants/constants";
 import { useRouter } from "next/router";
 
 type ElementProps = {

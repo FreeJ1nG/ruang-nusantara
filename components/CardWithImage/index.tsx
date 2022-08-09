@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from "react";
-import { Genres, Interests, Regions, Sorts } from "../../constants";
+import { Genres, Interests, Regions, Sorts } from "../../constants/constants";
 
 import Image from "next/image";
 

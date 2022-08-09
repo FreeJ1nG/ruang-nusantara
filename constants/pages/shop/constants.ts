@@ -1,5 +1,5 @@
 import { Genres } from "../../constants";
-import { ProductCardProps } from "../../components/ProductCard/constants";
+import { ProductCardProps } from "../../../components/ProductCard/constants";
 
 export const PRODUCTS: ProductCardProps[] = [
 	{

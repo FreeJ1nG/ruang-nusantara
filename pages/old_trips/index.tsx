@@ -12,10 +12,10 @@ import {
 	To_Region,
 	To_Sort,
 	split,
-} from "../../constants";
+} from "../../constants/constants";
 import { FC, useContext, useEffect, useState } from "react";
 
-import { BOOKINGS } from "./constants";
+import { BOOKINGS } from "../../constants/pages/trips/constants";
 import BookingCard from "../../components/BookingCard";
 import Button from "../../components/Button/Button";
 import { Carousel } from "react-responsive-carousel";
@@ -444,12 +444,12 @@ const LandingCard = () => {
 				/>
 			</div>
 			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full md:w-2/5 flex flex-col gap-y-10 justify-center z-60">
-				<h1 className="drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
+				<h1 className="font-ubuntu drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
 					{indo
 						? "Rasakan Penjalanan yang Tidak Terlupakan"
 						: "Experience world-class trip with Us"}
 				</h1>
-				<h1 className="drop-shadow-2xl font-ubuntu font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
+				<h1 className="drop-shadow-2xl font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
 					{indo
 						? ""
 						: "Pack your bag, set your sights, and get ready for a memorable trip"}
