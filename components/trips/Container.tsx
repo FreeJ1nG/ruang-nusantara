@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 
-import { PropsType } from "../../../constants/pages/trips/constants";
-import { TripStage } from "../../../constants/pages/trips/constants";
+import { PropsType } from "$constants/pages/trips/constants";
+import { TripStage } from "$constants/pages/trips/constants";
 
 const Container: FC<PropsType> = ({
 	children,

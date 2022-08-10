@@ -3,14 +3,14 @@ import {
 	PropsType,
 	TRAVEL_TYPE_CARDS,
 	TripStage,
-} from "../../../constants/pages/trips/constants";
-import { Addons, TravelType } from "../../../constants/constants";
+} from "$constants/pages/trips/constants";
+import { Addons, TravelType } from "$constants/constants";
 import { FC, useContext, useState } from "react";
 
-import Button from "../../../components/Button/Button";
+import Button from "$components/Button/Button";
 import CardContainer from "./CardContainer";
 import Image from "next/image";
-import { IndoContext } from "../../../context/IndoContext";
+import { IndoContext } from "$context/IndoContext";
 
 const AddonCard: FC<{
 	imageSrc: string;

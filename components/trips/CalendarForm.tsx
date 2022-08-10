@@ -1,7 +1,7 @@
-import { Month_Index, Months, To_Month } from "../../../constants/constants";
-import { PropsType, TripStage } from "../../../constants/pages/trips/constants";
+import { Month_Index, Months, To_Month } from "$constants/constants";
+import { PropsType, TripStage } from "$constants/pages/trips/constants";
 
-import Button from "../../../components/Button/Button";
+import Button from "$components/Button/Button";
 import { FC } from "react";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import TextField from "@mui/material/TextField";

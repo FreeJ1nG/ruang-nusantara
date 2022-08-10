@@ -2,11 +2,11 @@ import {
 	MonthCards,
 	PropsType,
 	TripStage,
-} from "../../../constants/pages/trips/constants";
+} from "$constants/pages/trips/constants";
 
 import { FC } from "react";
-import MonthCard from "../../../components/MonthCard";
-import { To_Month } from "../../../constants/constants";
+import MonthCard from "$components/MonthCard";
+import { To_Month } from "$constants/constants";
 
 const MonthForm: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 	const date = new Date();

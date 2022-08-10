@@ -3,13 +3,13 @@ import {
 	INTEREST_CARDS,
 	PropsType,
 	TripStage,
-} from "../../../constants/pages/trips/constants";
+} from "$constants/pages/trips/constants";
 
-import Button from "../../../components/Button/Button";
+import Button from "$components/Button/Button";
 import CardContainer from "./CardContainer";
 import Image from "next/image";
-import { IndoContext } from "../../../context/IndoContext";
-import { Interests } from "../../../constants/constants";
+import { IndoContext } from "$context/IndoContext";
+import { Interests } from "$constants/constants";
 
 const InterestCard: FC<{
 	imageSrc: string;
