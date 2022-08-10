@@ -13,7 +13,15 @@ import TravelWithForm from "$components/trips/TravelWithForm";
 
 const Trips: FC = () => {
 	const [stage, setStage] = useState<TripStage>(TripStage.HOMEPAGE);
-	const [datas, setDatas] = useState<DatasType>({});
+	const [datas, setDatas] = useState<DatasType>({
+		region: null,
+		month: null,
+		departure_date: null,
+		duration: null,
+		travel_type: null,
+		interests: null,
+		addons: null,
+	});
 
 	const props = {
 		stage,
@@ -84,8 +92,6 @@ const Trips: FC = () => {
 			component = null;
 			break;
 	}
-
-	console.log(component);
 
 	return <div className="mb-10 md:mb-20 xl:mb-40">{component}</div>;
 };

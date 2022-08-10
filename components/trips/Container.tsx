@@ -24,6 +24,15 @@ const Container: FC<PropsType> = ({
 			</button>
 		);
 	};
+	const initData = {
+		region: null,
+		month: null,
+		departure_date: null,
+		duration: null,
+		travel_type: null,
+		interests: null,
+		addons: null,
+	};
 
 	return (
 		<div className="w-full flex justify-center">
@@ -32,26 +41,26 @@ const Container: FC<PropsType> = ({
 					<div className="px-10 w-full flex flex-col gap-y-2">
 						<h1 className="text-base font-medium">PLANNING YOUR TRIP TO</h1>
 						<div className="flex flex-row gap-x-5 overflow-auto">
-							{datas.region && stage > TripStage.MAP && (
+							{datas?.region && stage > TripStage.MAP && (
 								<StageButton
 									label={datas.region}
 									onClick={() => {
-										setDatas({});
+										setDatas({ ...initData });
 										setStage(TripStage.MAP);
 									}}
 								/>
 							)}
-							{datas.month && stage === TripStage.WHEN_CALENDAR && (
+							{datas?.month && stage === TripStage.WHEN_CALENDAR && (
 								<StageButton
 									label={datas.month}
 									onClick={() => {
-										setDatas({ region: datas.region });
+										setDatas({ ...initData, region: datas.region });
 										setStage(TripStage.WHEN_MONTH);
 									}}
 								/>
 							)}
-							{datas.month &&
-								datas.departure_date &&
+							{datas?.month &&
+								datas?.departure_date &&
 								stage > TripStage.WHEN_CALENDAR && (
 									<StageButton
 										label={
@@ -60,16 +69,17 @@ const Container: FC<PropsType> = ({
 											JSON.stringify(datas.departure_date.getDate())
 										}
 										onClick={() => {
-											setDatas({ region: datas.region });
+											setDatas({ ...initData, region: datas.region });
 											setStage(TripStage.WHEN_MONTH);
 										}}
 									/>
 								)}
-							{datas.duration && stage > TripStage.DURATION && (
+							{datas?.duration && stage > TripStage.DURATION && (
 								<StageButton
 									label={`${datas.duration.from}-${datas.duration.to} days`}
 									onClick={() => {
 										setDatas({
+											...initData,
 											region: datas.region,
 											month: datas.month,
 											departure_date: datas.departure_date,
@@ -78,11 +88,12 @@ const Container: FC<PropsType> = ({
 									}}
 								/>
 							)}
-							{datas.travel_type && stage > TripStage.WHO && (
+							{datas?.travel_type && stage > TripStage.WHO && (
 								<StageButton
 									label={datas.travel_type}
 									onClick={() => {
 										setDatas({
+											...initData,
 											region: datas.region,
 											month: datas.month,
 											departure_date: datas.departure_date,
@@ -92,7 +103,7 @@ const Container: FC<PropsType> = ({
 									}}
 								/>
 							)}
-							{datas.interests && stage > TripStage.INTERESTS && (
+							{datas?.interests && stage > TripStage.INTERESTS && (
 								<StageButton
 									label={
 										datas.interests.length > 1
@@ -101,6 +112,7 @@ const Container: FC<PropsType> = ({
 									}
 									onClick={() => {
 										setDatas({
+											...initData,
 											region: datas.region,
 											month: datas.month,
 											departure_date: datas.departure_date,

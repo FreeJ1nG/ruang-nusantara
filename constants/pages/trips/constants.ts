@@ -126,13 +126,13 @@ export type PropsType = {
 };
 
 export type DatasType = {
-	region?: Regions;
-	month?: Months;
-	departure_date?: Date;
-	duration?: { from: number; to: number };
-	travel_type?: TravelType;
-	interests?: Interests[];
-	addons?: Addons[];
+	region?: Regions | null;
+	month?: Months | null;
+	departure_date?: Date | null;
+	duration?: { from: number; to: number } | null;
+	travel_type?: TravelType | null;
+	interests?: Interests[] | null;
+	addons?: Addons[] | null;
 };
 
 export const MonthCards: MonthCardType[] = [
