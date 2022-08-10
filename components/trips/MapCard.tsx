@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
-import { PropsType, TripStage } from "../../../constants/pages/trips/constants";
+import { PropsType, TripStage } from "$constants/pages/trips/constants";
 
 import Image from "next/image";
-import LocationButton from "../../../components/Button/LocationButton";
-import { Regions } from "../../../constants/constants";
+import LocationButton from "$components/Button/LocationButton";
+import { Regions } from "$constants/constants";
 
 const MapCard: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 	const [filter, setFilter] = useState<string>("");

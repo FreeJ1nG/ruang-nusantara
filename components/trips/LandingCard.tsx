@@ -1,10 +1,10 @@
 import { FC, useContext } from "react";
 
-import Button from "../../../components/Button/Button";
+import Button from "$components/Button/Button";
 import Image from "next/image";
-import { IndoContext } from "../../../context/IndoContext";
-import { PropsType } from "../../../constants/pages/trips/constants";
-import { TripStage } from "../../../constants/pages/trips/constants";
+import { IndoContext } from "$context/IndoContext";
+import { PropsType } from "$constants/pages/trips/constants";
+import { TripStage } from "$constants/pages/trips/constants";
 
 const LandingCard: FC<PropsType> = ({ setStage, stage }) => {
 	const indo = useContext(IndoContext);

@@ -1,12 +1,12 @@
 import { FC, useContext, useState } from "react";
 
-import Button from "../../../components/Button/Button";
+import Button from "$components/Button/Button";
 import CardContainer from "./CardContainer";
-import { DURATION_CARDS } from "../../../constants/pages/trips/constants";
+import { DURATION_CARDS } from "$constants/pages/trips/constants";
 import Image from "next/image";
-import { IndoContext } from "../../../context/IndoContext";
-import { PropsType } from "../../../constants/pages/trips/constants";
-import { TripStage } from "../../../constants/pages/trips/constants";
+import { IndoContext } from "$context/IndoContext";
+import { PropsType } from "$constants/pages/trips/constants";
+import { TripStage } from "$constants/pages/trips/constants";
 
 const DurationCard: FC<{
 	id: number;

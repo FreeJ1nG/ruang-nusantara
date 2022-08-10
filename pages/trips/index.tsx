@@ -1,15 +1,15 @@
 import { DatasType, TripStage } from "../../constants/pages/trips/constants";
 import { FC, ReactNode, useState } from "react";
 
-import AddonsForm from "./components/AddonsForm";
-import CalendarForm from "./components/CalendarForm";
-import Container from "./components/Container";
-import DurationForm from "./components/DurationForm";
-import InterestsForm from "./components/InterestsForm";
-import LandingCard from "./components/LandingCard";
-import MapCard from "./components/MapCard";
-import MonthForm from "./components/MonthForm";
-import TravelWithForm from "./components/TravelWithForm";
+import AddonsForm from "$components/trips/AddonsForm";
+import CalendarForm from "$components/trips/CalendarForm";
+import Container from "$components/trips/Container";
+import DurationForm from "$components/trips/DurationForm";
+import InterestsForm from "$components/trips/InterestsForm";
+import LandingCard from "$components/trips/LandingCard";
+import MapCard from "$components/trips/MapCard";
+import MonthForm from "$components/trips/MonthForm";
+import TravelWithForm from "$components/trips/TravelWithForm";
 
 const Trips: FC = () => {
 	const [stage, setStage] = useState<TripStage>(TripStage.HOMEPAGE);
