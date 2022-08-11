@@ -36,7 +36,7 @@ const Container: FC<PropsType> = ({
 
 	return (
 		<div className="w-full flex justify-center">
-			<div className="w-full flex flex-col gap-y-12 my-20">
+			<div className="w-full flex flex-col gap-y-12 my-10">
 				<div className="px-5 sm:px-10 md:px-20 lg:px-40 xl:px-80 2xl:px-96 w-full flex flex-col gap-y-12">
 					<div className="px-10 w-full flex flex-col gap-y-2">
 						<h1 className="text-base font-medium">PLANNING YOUR TRIP TO</h1>

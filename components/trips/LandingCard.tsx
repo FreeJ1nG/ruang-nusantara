@@ -10,7 +10,7 @@ const LandingCard: FC<PropsType> = ({ setStage, stage }) => {
 	const indo = useContext(IndoContext);
 
 	return (
-		<div className="relative w-full h-screen flex flex-row text-white">
+		<div className="relative w-full h-[calc(100vh-80px)] flex flex-row text-white">
 			<div className="absolute bottom-10 left-0 xl:w-[600px] xl:h-[300px]">
 				<Image src="/trips/megamendung.png" alt="Megamendung" layout="fill" />
 			</div>

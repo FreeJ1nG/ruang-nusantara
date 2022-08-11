@@ -17,24 +17,16 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 	const [showMenu, setShowMenu] = useState<boolean>(false);
 
 	return (
-		<div
-			className={`font-ubuntu ${
-				router.pathname === "/" ? "text-white" : "text-black"
-			}`}
-		>
+		<div className={`font-ubuntu text-black`}>
 			<Popup showPopup={showMenu} setShowPopup={setShowMenu}>
 				<div className="w-full h-full p-10 flex flex-col gap-y-5">
 					{MENUS.map((menu) => (
-						<MenuElement key={menu.id} {...menu} />
+						<MenuElement key={menu.id} {...menu} setShowMenu={setShowMenu} />
 					))}
 				</div>
 			</Popup>
 			<div
-				className={`z-100 flex flex-row justify-between items-center px-5 md:px-10 xl:px-20 h-20 ${
-					router.pathname === "/"
-						? "bg-transparent absolute top-0 left-0 right-0"
-						: "bg-white relative"
-				}`}
+				className={`shadow-md z-90 flex flex-row justify-between items-center px-5 md:px-10 xl:px-20 h-20 bg-white relative`}
 			>
 				<Link href="/">
 					<a className="flex flex-row items-center gap-x-2 md:gap-x-5">

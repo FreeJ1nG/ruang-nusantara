@@ -42,7 +42,7 @@ const CardWithImage: FC<CardWithImageProps> = ({
 				on && "bg-yellowText"
 			} flex flex-col gap-y-2 justify-center items-center rounded-xl shadow-md`}
 		>
-			<div className="relative w-20 h-20">
+			<div className="relative w-24 h-32">
 				<Image src={imageSrc} alt={value} layout="fill" />
 			</div>
 			<div className="font-ubuntu font-medium">{label}</div>

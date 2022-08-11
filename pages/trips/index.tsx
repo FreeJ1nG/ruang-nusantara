@@ -93,7 +93,7 @@ const Trips: FC = () => {
 			break;
 	}
 
-	return <div className="mb-10 md:mb-20 xl:mb-40">{component}</div>;
+	return <div className="min-h-[calc(100vh-80px)]">{component}</div>;
 };
 
 export default Trips;

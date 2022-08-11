@@ -12,6 +12,7 @@ export type DestinationType = {
 	region: Regions;
 	categories: Interests[];
 	title: string;
+	description: string;
 	imageSrc: string;
 };
 
@@ -42,8 +43,10 @@ export const DESTINATIONS: DestinationType[] = [
 		id: 0,
 		region: Regions.JAVA,
 		categories: [Interests.ARTS],
-		title: "Borobudur Temple",
+		title: "Borobudur & Prambanan",
 		imageSrc: "/destinations/borobudur.png",
+		description:
+			"History comes alive as you step into the realm of Borobudur and Prambanan.",
 	},
 	{
 		id: 1,
@@ -51,13 +54,17 @@ export const DESTINATIONS: DestinationType[] = [
 		categories: [Interests.NATURE, Interests.RECREATION],
 		title: "Bromo Tengger Semeru",
 		imageSrc: "/destinations/bromo.png",
+		description:
+			"Bromo Tengger Semeru National Park is one of the best mountain range in the world.",
 	},
 	{
 		id: 2,
-		region: Regions.NUSA_TENGGARA,
+		region: Regions.SUMATERA,
 		categories: [Interests.NATURE, Interests.RECREATION],
-		title: "Wae Rebo",
-		imageSrc: "/destinations/wae_rebo.png",
+		title: "Lake Toba",
+		imageSrc: "/destinations/lake_toba.png",
+		description:
+			"An eye over the mount. Lake Toba is one of the most iconic destinations in Indonesia",
 	},
 	{
 		id: 3,
@@ -65,6 +72,8 @@ export const DESTINATIONS: DestinationType[] = [
 		categories: [Interests.NATURE, Interests.RECREATION],
 		title: "Thousand Islands",
 		imageSrc: "/destinations/thousand_islands.png",
+		description:
+			"Beyond the bustling megapolitan of Jakarta, lies a paradise just by its coast.",
 	},
 	{
 		id: 4,
@@ -72,6 +81,8 @@ export const DESTINATIONS: DestinationType[] = [
 		categories: [Interests.NATURE, Interests.RECREATION],
 		title: "Tanjung Lesung",
 		imageSrc: "/destinations/tanjung_lesung.png",
+		description:
+			"A combination of natural wealth and native culture of Banten.",
 	},
 	{
 		id: 5,
@@ -79,48 +90,43 @@ export const DESTINATIONS: DestinationType[] = [
 		categories: [Interests.RECREATION],
 		title: "Mandalika",
 		imageSrc: "/destinations/mandalika.png",
+		description: "A place where paradise on Earth can truly be found",
 	},
 	{
 		id: 6,
-		region: Regions.JAVA,
-		categories: [Interests.ARTS],
-		title: "Borobudur Temple",
-		imageSrc: "/destinations/borobudur.png",
+		region: Regions.NUSA_TENGGARA,
+		categories: [Interests.NATURE],
+		title: "Labuan Bajo",
+		imageSrc: "/destinations/labuan_bajo.png",
+		description:
+			"Located on the island of Flores in Nusa Tenggara, Labuan Bajo is a breathtaking small fishing town in the most west of the island.",
 	},
 	{
 		id: 7,
-		region: Regions.JAVA,
-		categories: [Interests.NATURE, Interests.RECREATION],
-		title: "Bromo Tengger Semeru",
-		imageSrc: "/destinations/bromo.png",
+		region: Regions.SULAWESI,
+		categories: [Interests.NATURE],
+		title: "Morotai",
+		imageSrc: "/destinations/morotai.png",
+		description:
+			"Located in the Northside of Halmahera Islands, Northernmost corner of Maluku.",
 	},
 	{
 		id: 8,
-		region: Regions.NUSA_TENGGARA,
-		categories: [Interests.NATURE, Interests.RECREATION],
-		title: "Wae Rebo",
-		imageSrc: "/destinations/wae_rebo.png",
+		region: Regions.SULAWESI,
+		categories: [Interests.NATURE],
+		title: "Wakatobi",
+		imageSrc: "/destinations/wakatobi.png",
+		description:
+			"What if you can find a rural version of Bali? We present to you Wakatobi, a new place of island travel destination.",
 	},
 	{
 		id: 9,
-		region: Regions.JAVA,
-		categories: [Interests.NATURE, Interests.RECREATION],
-		title: "Thousand Islands",
-		imageSrc: "/destinations/thousand_islands.png",
-	},
-	{
-		id: 10,
-		region: Regions.JAVA,
-		categories: [Interests.NATURE, Interests.RECREATION],
-		title: "Tanjung Lesung",
-		imageSrc: "/destinations/tanjung_lesung.png",
-	},
-	{
-		id: 11,
-		region: Regions.NUSA_TENGGARA,
-		categories: [Interests.RECREATION],
-		title: "Mandalika",
-		imageSrc: "/destinations/mandalika.png",
+		region: Regions.SUMATERA,
+		categories: [Interests.NATURE],
+		title: "Tanjung Kelayang",
+		imageSrc: "/destinations/tanjung_kelayang.png",
+		description:
+			"A really sweet escape from your crowded city to the beauty rock islands in Tanjung Kelayang",
 	},
 ];
 

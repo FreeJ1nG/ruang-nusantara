@@ -32,14 +32,14 @@ const TripsCard: FC<PropTypes> = ({ brownStyle }) => {
 		<div
 			className={`${
 				brownStyle && "bg-darkBrown3 text-white"
-			} flex flex-col py-10 md:py-20 lg:py-40 px-5 md:px-14 lg:px-20 gap-y-5 sm:gap-y-8 md:gap-y-20`}
+			} flex flex-col py-10 md:py-20 lg:py-40 px-5 md:px-14 lg:px-20 gap-y-5 sm:gap-y-8 md:gap-y-20 bg-white`}
 		>
 			<div className="flex flex-col gap-y-2 md:gap-y-5">
-				<h1 className="font-ubuntu font-medium tracking-wide text-center md:text-left">
+				<h1 className="font-ubuntu font-medium tracking-wide text-center md:text-left text-lg xl:text-xl">
 					{indo ? "CERITA PERJALANAN" : "TRAVEL STORIES"}
 				</h1>
 				<div className="flex flex-col items-center md:flex-row gap-y-2 justify-between">
-					<h1 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-black text-center md:text-left">
+					<h1 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-bold text-center md:text-left">
 						{indo
 							? "Inspirasi Perjalanan"
 							: "Get inspired from the latest stories"}

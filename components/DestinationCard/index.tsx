@@ -26,11 +26,10 @@ const DestinationCard: FC<ElementProps> = ({
 			className={`w-full flex justify-center rounded-xl shadow-lg`}
 		>
 			<div className="w-full flex flex-col items-start gap-y-2 font-ubuntu">
-				<div className="relative w-full h-60">
+				<div className="relative w-full h-80">
 					<Image
 						src={imageSrc}
 						layout="fill"
-						objectFit="cover"
 						alt={title}
 						className="rounded-tl-xl rounded-tr-xl"
 					/>

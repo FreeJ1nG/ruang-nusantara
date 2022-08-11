@@ -135,6 +135,10 @@ export type DatasType = {
 	addons?: Addons[] | null;
 };
 
+export const Cities: { name: string; region: Regions; trending?: boolean; imageSrc: string }[] = [
+	
+];
+
 export const MonthCards: MonthCardType[] = [
 	{
 		month: To_Month[0],

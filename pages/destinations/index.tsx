@@ -11,12 +11,10 @@ import CardWithImage from "../../components/CardWithImage/index";
 import { Carousel } from "react-responsive-carousel";
 import { DESTINATIONS } from "../../constants/pages/destinations/constants";
 import DestinationCard from "../../components/DestinationCard/index";
+import DestinationsCard from '../../components/DestinationsCard/index';
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
 import RegionSelect from "../../components/Select/RegionSelect";
-import Select from "../../components/Select/Select";
-import SelectChecklist from "../../components/Select/SelectChecklist";
-import TripsCard from "../../components/TripsCard/index";
 import { split } from "../../constants/constants";
 import { useRouter } from "next/router";
 import { useWindowSize } from "../../hooks/useWindowSize";
@@ -31,7 +29,7 @@ const Destinations: FC = () => {
 	return (
 		<div className="flex flex-col">
 			<Content indo={indo} />
-			<TripsCard brownStyle />
+				<DestinationsCard />
 		</div>
 	);
 };
@@ -103,6 +101,16 @@ const Content: FC<PropTypes> = ({ indo }) => {
 
 	return (
 		<div className="relative flex flex-col px-2 sm:px-20 md:px-32 lg:px-20 xl:px-32 2xl:px-60 py-20">
+			<div className="absolute right-0 top-10">
+				<div className="relative xl:h-[600px] xl:w-[300px] hidden md:block">
+					<Image src="/pattern1.png" alt="Pattern 1" layout="fill"/>
+				</div>
+			</div>
+			<div className="absolute left-0 bottom-10">
+				<div className="relative xl:h-[600px] xl:w-[300px] hidden lg:block">
+					<Image src="/pattern2.png" alt="Pattern 2" layout="fill"/>
+				</div>
+			</div>
 			<div className="px-10 flex flex-col sm:flex-row md:justify-center items-end gap-y-5 gap-x-5 lg:gap-x-20">
 				<div className="w-full sm:w-1/2 lg:w-1/5">
 					<RegionSelect
@@ -186,50 +194,41 @@ const Content: FC<PropTypes> = ({ indo }) => {
 						))}
 				</Carousel>
 			</div>
-			<div className="absolute hidden lg:block lg:-bottom-28 right-0">
-				<div className="relative lg:w-[500px] lg:h-60">
-					<Image
-						src="/destinations/megamendung.png"
-						alt="Megamendung"
-						layout="fill"
-					/>
-				</div>
-			</div>
 		</div>
 	);
 };
 
-const LandingCard: FC<PropTypes> = ({ indo }) => {
-	const router = useRouter();
+// const LandingCard: FC<PropTypes> = ({ indo }) => {
+// 	const router = useRouter();
 
-	return (
-		<div className="relative w-full flex flex-row justify-end overflow-hidden h-screen text-white">
-			<div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-black/10" />
-			<div className="relative w-full h-full">
-				<Image
-					src="/rinjani.jpeg"
-					layout="fill"
-					objectFit="cover"
-					objectPosition="bottom"
-					alt="Raja Ampat"
-				/>
-			</div>
-			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full flex flex-row items-center z-60">
-				<div className="w-full md:w-2/5 flex flex-col gap-y-10">
-					<h1 className="font-ubuntu drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
-						{indo
-							? "Jelajahi Indonesia!"
-							: "Explore different regions of Indonesia!"}
-					</h1>
-					<h1 className="drop-shadow-2xl font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
-						{indo
-							? "Jelajahi 5300 jenis makanan, 2775 atraksi, 64 baju tradisional dan kriya. Nawasena!"
-							: "Every place has a story, every trip is unforgettable"}
-					</h1>
-				</div>
-			</div>
-		</div>
-	);
-};
+// 	return (
+// 		<div className="relative w-full flex flex-row justify-end overflow-hidden h-screen text-white">
+// 			<div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-black/10" />
+// 			<div className="relative w-full h-full">
+// 				<Image
+// 					src="/rinjani.jpeg"
+// 					layout="fill"
+// 					objectFit="cover"
+// 					objectPosition="bottom"
+// 					alt="Raja Ampat"
+// 				/>
+// 			</div>
+// 			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full flex flex-row items-center z-60">
+// 				<div className="w-full md:w-2/5 flex flex-col gap-y-10">
+// 					<h1 className="font-ubuntu drop-shadow-2xl text-center md:text-left text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
+// 						{indo
+// 							? "Jelajahi Indonesia!"
+// 							: "Explore different regions of Indonesia!"}
+// 					</h1>
+// 					<h1 className="drop-shadow-2xl font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
+// 						{indo
+// 							? "Jelajahi 5300 jenis makanan, 2775 atraksi, 64 baju tradisional dan kriya. Nawasena!"
+// 							: "Every place has a story, every trip is unforgettable"}
+// 					</h1>
+// 				</div>
+// 			</div>
+// 		</div>
+// 	);
+// };
 
 export default Destinations;
