@@ -1,3 +1,25 @@
+// REVIEW: enum itu type, yang set of objectsnya kecil, naming-wise mereka
+// selalu singular sama kyk "string" atau "number" karena trippy misal
+// x: numbers  x nya itu kan cuma suatu angka. bukan banyak angka.
+//
+// konvensinya PascalCase
+// e.g. Nature instead of NATURE, ThemePark instead of THEME_PARK.
+//
+// types rasanya bukan constants kalo lu mau bikin types file gamasalah.
+//
+
+// REVIEW: lu bedain apa yang enum apa yang actually emang naturally dynamic
+// misal genres, interests
+//
+// ini ga fit ke enum kalo lu simpen di DB dia basically cuma tags doang yang
+// naturally untyped, something yang lu biasanya "iterate-through" gitu loh.
+// gamasalah untuk lu access by ID doang.
+//
+// Kyk months are technically enums, tapi apakah lu gain anything dari
+// type-safety nya dibanding storing in bare 0-11 ato 1-12? I don't think so :/
+//
+// things kyk sort-order dsb is a good enums karena ya... emang limited gitu.
+// bukan something yang kyk backend lu update terus lu harus keep-up
 export enum Interests {
 	NATURE = "Nature and Wildlife",
 	CULINARY = "Culinary and Wellness",
@@ -22,32 +44,32 @@ export const INTERESTS_CARDS: {
 	label: string;
 	value: Interests;
 }[] = [
-	{
-		id: 0,
-		imageSrc: "/cards/nature.png",
-		label: "Nature",
-		value: Interests.NATURE,
-	},
-	{
-		id: 1,
-		imageSrc: "/cards/culinary.png",
-		label: "Culinary",
-		value: Interests.CULINARY,
-	},
-	{
-		id: 2,
-		imageSrc: "/cards/recreation.png",
-		label: "Recreation",
-		value: Interests.RECREATION,
-	},
-	{ id: 3, imageSrc: "/cards/arts.png", label: "Arts", value: Interests.ARTS },
-	{
-		id: 4,
-		imageSrc: "/cards/theme_park.png",
-		label: "Theme Park",
-		value: Interests.THEME_PARK,
-	},
-];
+		{
+			id: 0,
+			imageSrc: "/cards/nature.png",
+			label: "Nature",
+			value: Interests.NATURE,
+		},
+		{
+			id: 1,
+			imageSrc: "/cards/culinary.png",
+			label: "Culinary",
+			value: Interests.CULINARY,
+		},
+		{
+			id: 2,
+			imageSrc: "/cards/recreation.png",
+			label: "Recreation",
+			value: Interests.RECREATION,
+		},
+		{ id: 3, imageSrc: "/cards/arts.png", label: "Arts", value: Interests.ARTS },
+		{
+			id: 4,
+			imageSrc: "/cards/theme_park.png",
+			label: "Theme Park",
+			value: Interests.THEME_PARK,
+		},
+	];
 
 export enum Recommendations {
 	OFF_SEASON = "OFF SEASON",
@@ -56,6 +78,7 @@ export enum Recommendations {
 	OUR_PICK = "OUR PICK",
 }
 
+// REVIEW: gw gangerti kenapa ini penting tbh
 export enum Months {
 	January = "Jan",
 	February = "Feb",
@@ -219,12 +242,13 @@ export const INTERESTS_FILTER = [
 ];
 
 const reverseString = (str: string) => {
-	let splitString = str.split("");
-	let reverseArray = splitString.reverse();
-	let joinArray = reverseArray.join("");
-	return joinArray;
+	// REVIEW: okay to be terse
+	return str.split("").reverse().join("");
 };
 
+
+// REVIEW: look into
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
 export const ToRupiahFormat = (rupiah: number) => {
 	if (rupiah === 0) {
 		return "";
@@ -255,6 +279,8 @@ export const ToNumberFormat = (rupiah: string) => {
 	return ret;
 };
 
+// REVIEW: look into lodash chunk
+// https://lodash.com/docs/4.17.15#chunk
 export const split = (array: any[], every: number) => {
 	let id = 0;
 	let ret: { id: number; value: any[] }[] = [];
