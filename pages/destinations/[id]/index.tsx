@@ -49,8 +49,7 @@ const Destination: FC = () => {
 
 	return (
 		<div className="flex flex-col gap-y-12">
-			<div className="h-24 w-full bg-white"></div>
-			<div className="flex flex-col gap-y-12 px-5 md:px-10 lg:px-32 xl:px-40 pb-20">
+			<div className="flex flex-col gap-y-12 py-20 px-5 md:px-10 lg:px-32 xl:px-40">
 				<Routes destination={destination} />
 				<ContentCard destination={destination} />
 				<AttractionsCard

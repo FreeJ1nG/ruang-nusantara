@@ -24,15 +24,11 @@ const LandingCard: FC<PropsType> = ({ setStage, stage }) => {
 				/>
 			</div>
 			<div className="absolute top-0 bottom-0 left-0 md:left-20 px-10 md:px-0 w-full md:w-2/5 flex flex-col gap-y-10 justify-center z-60">
-				{indo ? (
-					<div className="font-ubuntu text-black drop-shadow-2xl text-center md:text-left text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold">
-						Rasakan Penjalanan yang Tidak Terlupakan
-					</div>
-				) : (
-					<h1 className="font-ubuntu text-black drop-shadow-2xl text-center md:text-left text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold">
-						Experience world-class trip with Us
-					</h1>
-				)}
+				<div className="font-ubuntu text-black drop-shadow-2xl text-center md:text-left text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-6xl font-bold">
+					{indo
+						? "Rasakan Penjalanan yang Tidak Terlupakan"
+						: "Experience world-class trip with Us"}
+				</div>
 				<h1 className="text-lightBrown drop-shadow-2xl font-normal text-center md:text-left text-lg sm:text-xl xl:text-2xl">
 					{indo
 						? "Rasakan perjalanan yang tidak akan Anda lupakan"

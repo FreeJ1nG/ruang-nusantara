@@ -7,6 +7,11 @@ export enum Interests {
 	EVERYTHING = "A bit of everything",
 }
 
+export enum UserStatus {
+	LOGGED_IN,
+	NOT_LOGGED_IN,
+}
+
 export const To_Interest: { [key: string]: Interests } = {
 	"Nature and Wildlife": Interests.NATURE,
 	"Culinary and Wellness": Interests.CULINARY,

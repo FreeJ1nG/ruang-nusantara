@@ -1,25 +1,28 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
 import Link from "next/link";
 import { MENUS } from "./constants";
 import Popup from "./components/Popup/Popup";
+import { UserContext } from "$context/UserContext";
+import { UserStatus } from "$constants/constants";
 import { useRouter } from "next/router";
 
 type NavbarProps = {
 	indo: boolean;
 	setIndo: Function;
+	setUser: Function;
 };
 
-const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
+const Index: FC<NavbarProps> = ({ indo, setIndo, setUser }) => {
 	const router = useRouter();
 	const [showMenu, setShowMenu] = useState<boolean>(false);
 
 	return (
 		<div className={`font-ubuntu text-black`}>
 			<Popup showPopup={showMenu} setShowPopup={setShowMenu}>
-				<div className="w-full h-full p-10 flex flex-col gap-y-5">
+				<div className="w-full h-full p-10 text-white flex flex-col gap-y-5">
 					{MENUS.map((menu) => (
 						<MenuElement key={menu.id} {...menu} setShowMenu={setShowMenu} />
 					))}
@@ -63,6 +66,97 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 						<MenuElement key={menu.id} {...menu} />
 					))}
 					<LanguageButton indo={indo} setIndo={setIndo} />
+					<Profile setUser={setUser} />
+				</div>
+			</div>
+		</div>
+	);
+};
+
+const Profile: FC<{ setUser: Function }> = ({ setUser }) => {
+	const user = useContext(UserContext);
+	const [open, setOpen] = useState<boolean>(false);
+	const dropdownRef = useRef<HTMLDivElement>(null);
+	const buttonRef = useRef<HTMLButtonElement>(null);
+
+	const MenuItem: FC<{
+		title: string;
+		imageSrc: string;
+		onClick: Function;
+	}> = ({ title, imageSrc, onClick }) => {
+		return (
+			<button
+				onClick={() => onClick()}
+				className={`${
+					open ? "block" : "hidden"
+				} w-full pl-5 py-2 transition-all duration-300 hover:bg-yellowText`}
+			>
+				<div
+					className={`flex items-center gap-x-5 duration-500 ${
+						open ? "block" : "hidden"
+					}`}
+				>
+					<Image src={imageSrc} alt={title} width={20} height={20} />
+					<h1 className="text-[16px]">{title}</h1>
+				</div>
+			</button>
+		);
+	};
+
+	useEffect(() => {
+		const handler = (e: any) => {
+			if (
+				dropdownRef.current &&
+				!dropdownRef.current.contains(e.target) &&
+				buttonRef.current &&
+				!buttonRef.current.contains(e.target)
+			) {
+				setOpen(false);
+			}
+		};
+		document.addEventListener("mousedown", handler);
+		return () => {
+			document.removeEventListener("mousedown", handler);
+		};
+	});
+
+	return (
+		<div className="relative">
+			<button
+				ref={buttonRef}
+				onClick={() => setOpen(!open)}
+				className="ml-10 w-10 h-10 flex justify-center items-center bg-darkBrown rounded-full"
+			>
+				<Image src="/avatar.png" alt="Avatar" width={24} height={24} />
+			</button>
+			<div
+				ref={dropdownRef}
+				className="absolute -left-28 right-0 top-16 flex flex-col shadow-xl"
+			>
+				<div
+					className={`transition-all duration-300 rounded-md ${
+						open ? "h-28" : "h-0"
+					} flex flex-col justify-center items-start bg-white`}
+				>
+					<MenuItem
+						title="My Bookings"
+						imageSrc="/navbar/bookings.png"
+						onClick={() => null}
+					/>
+					{user === UserStatus.LOGGED_IN && (
+						<MenuItem
+							title="Logout"
+							imageSrc="/navbar/logout.png"
+							onClick={() => setUser(UserStatus.NOT_LOGGED_IN)}
+						/>
+					)}
+					{user === UserStatus.NOT_LOGGED_IN && (
+						<MenuItem
+							title="Login"
+							imageSrc="/navbar/login.png"
+							onClick={() => setUser(UserStatus.LOGGED_IN)}
+						/>
+					)}
 				</div>
 			</div>
 		</div>
@@ -72,63 +166,18 @@ const Index: FC<NavbarProps> = ({ indo, setIndo }) => {
 type MenuElementPropType = {
 	where: string;
 	indoTitle: string;
-	indoFocusTitle?: string | undefined;
 	englishTitle: string;
-	englishFocusTitle?: string | undefined;
 	setShowMenu?: Function | undefined;
 };
 
 const MenuElement: FC<MenuElementPropType> = ({
 	where,
 	indoTitle,
-	indoFocusTitle,
 	englishTitle,
-	englishFocusTitle,
 	setShowMenu,
 }) => {
 	const router = useRouter();
 	const indo = useContext(IndoContext);
-	const [title, setTitle] = useState<{
-		indo: string;
-		english: string;
-	}>({
-		indo:
-			router.pathname === where
-				? indoFocusTitle
-					? indoFocusTitle
-					: indoTitle
-				: indoTitle,
-		english:
-			router.pathname === where
-				? englishFocusTitle
-					? englishFocusTitle
-					: englishTitle
-				: englishTitle,
-	});
-
-	useEffect(() => {
-		setTitle({
-			indo:
-				router.pathname === where
-					? indoFocusTitle
-						? indoFocusTitle
-						: indoTitle
-					: indoTitle,
-			english:
-				router.pathname === where
-					? englishFocusTitle
-						? englishFocusTitle
-						: englishTitle
-					: englishTitle,
-		});
-	}, [
-		router,
-		where,
-		englishTitle,
-		englishFocusTitle,
-		indoTitle,
-		indoFocusTitle,
-	]);
 
 	return (
 		<button
@@ -141,13 +190,13 @@ const MenuElement: FC<MenuElementPropType> = ({
 				className={`drop-shadow-2xl text-left lg:text-center font-semibold text-base xl:text-lg px-4 py-1 rounded-full transition-all duration-300 ${
 					where !== "/" &&
 					(router.pathname.includes(where)
-						? "bg-lightBrown text-white"
+						? "bg-darkBrown text-white"
 						: "bg-transparent")
 				} ${
-					where === "/" && router.pathname === "/" && "bg-lightBrown text-white"
+					where === "/" && router.pathname === "/" && "bg-darkBrown text-white"
 				}`}
 			>
-				{indo ? title.indo : title.english}
+				{indo ? indoTitle : englishTitle}
 			</h1>
 		</button>
 	);
@@ -162,14 +211,14 @@ const LanguageButton: FC<LanguageButtonProps> = ({ indo, setIndo }) => {
 	return (
 		<button
 			onClick={() => setIndo(!indo)}
-			className="text-white relative w-[74px] h-[37px] lg:w-[100px] lg:h-[50px] flex flex-row justify-center items-center rounded-full bg-darkBrown"
+			className="text-white relative w-[74px] h-[37px] lg:w-[90px] lg:h-[45px] flex flex-row justify-center items-center rounded-full bg-darkBrown"
 		>
-			<div className="pl-1 font-bold text-base lg:text-2xl w-1/2 z-50 flex justify-center items-center">
+			<div className="pl-1 font-bold text-base lg:text-xl w-1/2 z-50 flex justify-center items-center">
 				ID
 			</div>
 			<div
 				onClick={() => setIndo(true)}
-				className="pr-1 font-bold text-base lg:text-2xl w-1/2 z-50 flex justify-center items-center"
+				className="pr-1 font-bold text-base lg:text-xl w-1/2 z-50 flex justify-center items-center"
 			>
 				EN
 			</div>

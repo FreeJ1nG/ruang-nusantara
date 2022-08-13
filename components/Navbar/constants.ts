@@ -20,17 +20,13 @@ export const MENUS: MenuType[] = [
 		id: 2,
 		where: "/trips",
 		indoTitle: "Perjalanan",
-		indoFocusTitle: "Pemesanan",
 		englishTitle: "Trips",
-		englishFocusTitle: "Bookings",
 	},
 	{
 		id: 3,
 		where: "/shop",
 		indoTitle: "Belanja",
-		indoFocusTitle: "Keranjang (0)",
 		englishTitle: "Shop",
-		englishFocusTitle: "Cart (0)",
 	},
 ];
 
