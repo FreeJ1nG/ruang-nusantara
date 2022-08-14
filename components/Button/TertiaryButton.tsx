@@ -9,7 +9,7 @@ type ButtonProps = {
 	blackText?: boolean | undefined;
 };
 
-const Button: FC<ButtonProps> = ({
+const TertiaryButton: FC<ButtonProps> = ({
 	onClick,
 	label,
 	disabled,
@@ -40,4 +40,4 @@ const Button: FC<ButtonProps> = ({
 	);
 };
 
-export default Button;
+export default TertiaryButton;

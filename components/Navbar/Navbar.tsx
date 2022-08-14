@@ -1,10 +1,13 @@
 import { FC, useContext, useEffect, useRef, useState } from "react";
 
+import FullscreenPopup from "./components/FullScreenPopup";
 import Image from "next/image";
 import { IndoContext } from "../../context/IndoContext";
 import Link from "next/link";
+import LoginCard from "./components/LoginCard";
 import { MENUS } from "./constants";
-import Popup from "./components/Popup/Popup";
+import Popup from "./components/Popup";
+import SignupCard from "./components/SignupCard";
 import { UserContext } from "$context/UserContext";
 import { UserStatus } from "$constants/constants";
 import { useRouter } from "next/router";
@@ -13,21 +16,21 @@ type NavbarProps = {
 	indo: boolean;
 	setIndo: Function;
 	setUser: Function;
+	setUsers: Function;
 };
 
-const Index: FC<NavbarProps> = ({ indo, setIndo, setUser }) => {
-	const router = useRouter();
+const Index: FC<NavbarProps> = ({ indo, setIndo, setUser, setUsers }) => {
 	const [showMenu, setShowMenu] = useState<boolean>(false);
 
 	return (
 		<div className={`font-ubuntu text-black`}>
-			<Popup showPopup={showMenu} setShowPopup={setShowMenu}>
+			<FullscreenPopup showPopup={showMenu} setShowPopup={setShowMenu}>
 				<div className="w-full h-full p-10 text-white flex flex-col gap-y-5">
 					{MENUS.map((menu) => (
 						<MenuElement key={menu.id} {...menu} setShowMenu={setShowMenu} />
 					))}
 				</div>
-			</Popup>
+			</FullscreenPopup>
 			<div
 				className={`shadow-md z-90 flex flex-row justify-between items-center px-5 md:px-10 xl:px-20 h-20 bg-white relative`}
 			>
@@ -66,18 +69,23 @@ const Index: FC<NavbarProps> = ({ indo, setIndo, setUser }) => {
 						<MenuElement key={menu.id} {...menu} />
 					))}
 					<LanguageButton indo={indo} setIndo={setIndo} />
-					<Profile setUser={setUser} />
+					<Profile setUser={setUser} setUsers={setUsers} />
 				</div>
 			</div>
 		</div>
 	);
 };
 
-const Profile: FC<{ setUser: Function }> = ({ setUser }) => {
-	const user = useContext(UserContext);
+const Profile: FC<{ setUser: Function; setUsers: Function }> = ({
+	setUser,
+	setUsers,
+}) => {
 	const [open, setOpen] = useState<boolean>(false);
+	const [loginPanel, setLoginPanel] = useState<boolean>(false);
+	const [signupPanel, setSignupPanel] = useState<boolean>(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
+	const user = useContext(UserContext);
 
 	const MenuItem: FC<{
 		title: string;
@@ -121,42 +129,87 @@ const Profile: FC<{ setUser: Function }> = ({ setUser }) => {
 	});
 
 	return (
-		<div className="relative">
-			<button
-				ref={buttonRef}
-				onClick={() => setOpen(!open)}
-				className="ml-10 w-10 h-10 flex justify-center items-center bg-darkBrown rounded-full"
-			>
-				<Image src="/avatar.png" alt="Avatar" width={24} height={24} />
-			</button>
-			<div
-				ref={dropdownRef}
-				className="absolute -left-28 right-0 top-16 flex flex-col shadow-xl"
-			>
-				<div
-					className={`transition-all duration-300 rounded-md ${
-						open ? "h-28" : "h-0"
-					} flex flex-col justify-center items-start bg-white`}
+		<div className="font-poppins">
+			<Popup showPopup={loginPanel} setShowPopup={setLoginPanel}>
+				<LoginCard
+					setLoginPanel={setLoginPanel}
+					setSignupPanel={setSignupPanel}
+					setUser={setUser}
+				/>
+			</Popup>
+			<Popup showPopup={signupPanel} setShowPopup={setSignupPanel}>
+				<SignupCard
+					setLoginPanel={setLoginPanel}
+					setSignupPanel={setSignupPanel}
+					setUsers={setUsers}
+				/>
+			</Popup>
+			<div className="relative">
+				<button
+					ref={buttonRef}
+					onClick={() => setOpen(!open)}
+					className="ml-10 w-10 h-10 flex justify-center items-center bg-darkBrown rounded-full"
 				>
-					<MenuItem
-						title="My Bookings"
-						imageSrc="/navbar/bookings.png"
-						onClick={() => null}
-					/>
-					{user === UserStatus.LOGGED_IN && (
+					<Image src="/avatar.png" alt="Avatar" width={24} height={24} />
+				</button>
+				<div
+					ref={dropdownRef}
+					className="absolute -left-28 right-0 top-16 flex flex-col shadow-lg"
+				>
+					<div
+						className={`transition-all duration-300 rounded-md ${
+							open
+								? user.status === UserStatus.LOGGED_IN
+									? "h-32"
+									: "h-24"
+								: "h-0"
+						} flex flex-col justify-center items-start bg-white`}
+					>
+						{user.status === UserStatus.LOGGED_IN && (
+							<div
+								className={`pl-5 py-2 text-sm font-bold ${
+									open ? "text-black block" : "text-transparent hidden"
+								}`}
+							>
+								<div>
+									<span className="font-normal">Hi, </span>
+									<span className="font-semibold">{user.first_name}</span>
+								</div>
+							</div>
+						)}
 						<MenuItem
-							title="Logout"
-							imageSrc="/navbar/logout.png"
-							onClick={() => setUser(UserStatus.NOT_LOGGED_IN)}
+							title="My Bookings"
+							imageSrc="/navbar/bookings.png"
+							onClick={() => null}
 						/>
-					)}
-					{user === UserStatus.NOT_LOGGED_IN && (
-						<MenuItem
-							title="Login"
-							imageSrc="/navbar/login.png"
-							onClick={() => setUser(UserStatus.LOGGED_IN)}
-						/>
-					)}
+						{user.status === UserStatus.LOGGED_IN && (
+							<MenuItem
+								title="Logout"
+								imageSrc="/navbar/logout.png"
+								onClick={() => {
+									setUser({
+										status: UserStatus.NOT_LOGGED_IN,
+										first_name: null,
+										last_name: null,
+										email: null,
+										password: null,
+										bookings: [],
+									});
+									setOpen(false);
+								}}
+							/>
+						)}
+						{user.status === UserStatus.NOT_LOGGED_IN && (
+							<MenuItem
+								title="Login"
+								imageSrc="/navbar/login.png"
+								onClick={() => {
+									setLoginPanel(true);
+									setOpen(false);
+								}}
+							/>
+						)}
+					</div>
 				</div>
 			</div>
 		</div>

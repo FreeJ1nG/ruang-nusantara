@@ -11,6 +11,7 @@ type TextInputPropType = {
 	onEnter?: Function | undefined;
 	defaultValue?: any | undefined;
 	rightLabel?: boolean | undefined;
+	type?: "text" | "password";
 };
 
 const TextInput: FC<TextInputPropType> = ({
@@ -24,6 +25,7 @@ const TextInput: FC<TextInputPropType> = ({
 	onEnter,
 	defaultValue,
 	rightLabel,
+	type,
 }) => {
 	const [focused, setFocused] = useState(false);
 
@@ -51,7 +53,7 @@ const TextInput: FC<TextInputPropType> = ({
 				<input
 					name={name}
 					defaultValue={defaultValue}
-					type="text"
+					type={type === "password" ? "password" : "text"}
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							if (onEnter) onEnter();
@@ -67,11 +69,11 @@ const TextInput: FC<TextInputPropType> = ({
 						fit && "w-full"
 					} transition-all duration-400 outline-none px-5 py-3 ${
 						value === ""
-							? "placeholder:text-white"
+							? "placeholder:text-gray"
 							: "placeholder:text-transparent"
 					} placeholder:font-bold ${
-						focused && "border-2 border-lightBrown"
-					} rounded-xl bg-textInputBg/40`}
+						focused ? "border-2 border-lightBrown" : "border-2 border-gray"
+					} rounded-xl`}
 					placeholder={focused ? "" : label}
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
