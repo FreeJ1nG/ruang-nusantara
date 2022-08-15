@@ -24,10 +24,10 @@ export const MENUS: MenuType[] = [
 	},
 	{
 		id: 3,
-		where: "/shop",
-		indoTitle: "Belanja",
-		englishTitle: "Shop",
+		where: "/stories",
+		indoTitle: "Blog",
+		englishTitle: "Stories",
 	},
 ];
 
-export const BLACK_TEXT = ["/destinations", "/trips", "/shop"];
+export const BLACK_TEXT = ["/destinations", "/trips", "/stories"];

@@ -25,9 +25,9 @@ const TertiaryButton: FC<ButtonProps> = ({
 		>
 			<button>
 				<h1
-					className={`transition-all duration-75 hover:text-lightBrown ${
+					className={`transition-all duration-75 hover:text-yellowText ${
 						blackText && "text-black"
-					} ${footer && "text-footerText"} font-medium text-sm md:text-lg ${
+					} ${footer && "text-footerText"} text-sm font-medium md:text-lg ${
 						align === "left" && "text-left"
 					} ${align === "center" && "text-center"} ${
 						align === "right" && "text-right"

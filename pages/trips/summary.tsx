@@ -1,5 +1,6 @@
+import { PaperAirplaneIcon, StarIcon } from "@heroicons/react/outline";
+
 import { FC } from "react";
-import { StarIcon, PaperAirplaneIcon } from "@heroicons/react/outline";
 
 interface Transport {
     kind: "transport";
@@ -131,13 +132,13 @@ export const ItineraryDetailSection: FC<ItineraryDetailProps> = ({
         }
     };
 
-    return (
-        <div className="mx-4 flex flex-col items-center">
-            {itinerary.map((event) => (
-                <EventCard event={event} />
-            ))}
-        </div>
-    );
+return (
+    <div className="mx-4 flex flex-col items-center">
+        {itinerary.map((event) => (
+            <EventCard event={event} />
+        ))}
+    </div>
+);
 };
 
 export const TripSummaryPage: FC = () => {
