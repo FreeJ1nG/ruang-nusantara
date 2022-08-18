@@ -48,6 +48,127 @@ export const DURATION_CARDS: {
 	},
 ];
 
+export const CITIES: {
+	id: number;
+	imageSrc: string;
+	title: string;
+	region: Regions;
+	trending: boolean;
+}[] = [
+	{
+		id: 0,
+		imageSrc: "/destinations/borobudur.png",
+		title: "Yogyakarta",
+		region: Regions.JAVA,
+		trending: true,
+	},
+	{
+		id: 1,
+		imageSrc: "/trips/bandung.png",
+		title: "Bandung",
+		region: Regions.JAVA,
+		trending: false,
+	},
+	{
+		id: 2,
+		imageSrc: "/trips/jakarta.png",
+		title: "Jakarta",
+		region: Regions.JAVA,
+		trending: false,
+	},
+	{
+		id: 3,
+		imageSrc: "/trips/batu.jpeg",
+		title: "Batu",
+		region: Regions.JAVA,
+		trending: false,
+	},
+	{
+		id: 4,
+		imageSrc: "/trips/pontianak.jpeg",
+		title: "Pontianak",
+		region: Regions.KALIMANTAN,
+		trending: true,
+	},
+	{
+		id: 5,
+		imageSrc: "/trips/tanjung-selor.png",
+		title: "Tanjung Selor",
+		region: Regions.KALIMANTAN,
+		trending: false,
+	},
+	{
+		id: 6,
+		imageSrc: "/trips/samarinda.jpeg",
+		title: "Samarinda",
+		region: Regions.KALIMANTAN,
+		trending: false,
+	},
+	{
+		id: 7,
+		imageSrc: "/trips/balikpapan.jpeg",
+		title: "Balikpapan",
+		region: Regions.KALIMANTAN,
+		trending: false,
+	},
+	{
+		id: 8,
+		imageSrc: "/trips/denpasar.jpeg",
+		title: "Denpasar",
+		region: Regions.BALI,
+		trending: true,
+	},
+	{
+		id: 9,
+		imageSrc: "/trips/badung.jpeg",
+		title: "Badung",
+		region: Regions.BALI,
+		trending: false,
+	},
+	{
+		id: 10,
+		imageSrc: "/trips/buleleng.jpeg",
+		title: "Buleleng",
+		region: Regions.BALI,
+		trending: false,
+	},
+	{
+		id: 11,
+		imageSrc: "/trips/tabanan.webp",
+		title: "Tabanan",
+		region: Regions.BALI,
+		trending: false,
+	},
+	{
+		id: 12,
+		imageSrc: "/trips/sumbawa.jpeg",
+		title: "Sumbawa",
+		region: Regions.NUSA_TENGGARA,
+		trending: true,
+	},
+	{
+		id: 13,
+		imageSrc: "/trips/dompu.jpeg",
+		title: "Badung",
+		region: Regions.NUSA_TENGGARA,
+		trending: false,
+	},
+	{
+		id: 14,
+		imageSrc: "/trips/lombok.jpeg",
+		title: "Buleleng",
+		region: Regions.NUSA_TENGGARA,
+		trending: false,
+	},
+	{
+		id: 15,
+		imageSrc: "/trips/malaka.jpeg",
+		title: "Tabanan",
+		region: Regions.NUSA_TENGGARA,
+		trending: false,
+	},
+];
+
 export const TRAVEL_TYPE_CARDS: {
 	id: number;
 	imageSrc: string;
@@ -127,6 +248,7 @@ export type PropsType = {
 
 export type DatasType = {
 	region?: Regions | null;
+	city?: string;
 	month?: Months | null;
 	departure_date?: Date | null;
 	duration?: { from: number; to: number } | null;
@@ -135,9 +257,12 @@ export type DatasType = {
 	addons?: Addons[] | null;
 };
 
-export const Cities: { name: string; region: Regions; trending?: boolean; imageSrc: string }[] = [
-	
-];
+export const Cities: {
+	name: string;
+	region: Regions;
+	trending?: boolean;
+	imageSrc: string;
+}[] = [];
 
 export const MonthCards: MonthCardType[] = [
 	{
@@ -217,13 +342,14 @@ export const MonthCards: MonthCardType[] = [
 export enum TripStage {
 	HOMEPAGE = 0,
 	MAP = 1,
-	WHEN_MONTH = 2,
-	WHEN_CALENDAR = 3,
-	DURATION = 4,
-	WHO = 5,
-	INTERESTS = 6,
-	ADDONS = 7,
-	CHECKOUT = 8,
+	WHERE_CITY = 2,
+	WHEN_MONTH = 3,
+	WHEN_CALENDAR = 4,
+	DURATION = 5,
+	WHO = 6,
+	INTERESTS = 7,
+	ADDONS = 8,
+	CHECKOUT = 9,
 }
 
 export const BOOKINGS: BookingsType[] = [

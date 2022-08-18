@@ -14,16 +14,18 @@ const Container: FC<PropsType> = ({
 		label: ReactNode;
 		onClick: Function;
 	};
+
 	const StageButton: FC<StageButtonProps> = ({ label, onClick }) => {
 		return (
 			<button
 				onClick={() => onClick()}
-				className="min-w-fit bg-white font-semibold text-gray8 hover:text-lightBrown rounded-lg border-2 border-gray7 hover:border-yellowText transition-all duration-300 px-6 py-2"
+				className="min-w-fit rounded-lg border-2 border-gray7 bg-white px-6 py-2 font-semibold text-gray8 transition-all duration-300 hover:border-yellowText hover:text-lightBrown"
 			>
 				{label}
 			</button>
 		);
 	};
+
 	const initData = {
 		region: null,
 		month: null,
@@ -35,15 +37,24 @@ const Container: FC<PropsType> = ({
 	};
 
 	return (
-		<div className="w-full flex justify-center">
-			<div className="w-full flex flex-col gap-y-12 my-10">
-				<div className="px-5 sm:px-10 md:px-20 lg:px-40 xl:px-80 2xl:px-96 w-full flex flex-col gap-y-12">
-					<div className="px-10 w-full flex flex-col gap-y-2">
+		<div className="flex w-full justify-center">
+			<div className="my-10 flex w-full flex-col gap-y-12">
+				<div className="flex w-full flex-col gap-y-12 px-5 sm:px-10 md:px-20 lg:px-40 xl:px-80 2xl:px-96">
+					<div className="flex w-full flex-col gap-y-2 px-10">
 						<h1 className="text-base font-medium">PLANNING YOUR TRIP TO</h1>
 						<div className="flex flex-row gap-x-5 overflow-auto">
-							{datas?.region && stage > TripStage.MAP && (
+							{datas?.region && stage === TripStage.WHERE_CITY && (
 								<StageButton
 									label={datas.region}
+									onClick={() => {
+										setDatas({ ...initData });
+										setStage(TripStage.MAP);
+									}}
+								/>
+							)}
+							{datas.region && datas.city && stage > TripStage.WHERE_CITY && (
+								<StageButton
+									label={`${datas.region}, ${datas.city}`}
 									onClick={() => {
 										setDatas({ ...initData });
 										setStage(TripStage.MAP);
@@ -54,7 +65,11 @@ const Container: FC<PropsType> = ({
 								<StageButton
 									label={datas.month}
 									onClick={() => {
-										setDatas({ ...initData, region: datas.region });
+										setDatas({
+											...initData,
+											region: datas.region,
+											city: datas.city,
+										});
 										setStage(TripStage.WHEN_MONTH);
 									}}
 								/>
@@ -69,7 +84,11 @@ const Container: FC<PropsType> = ({
 											JSON.stringify(datas.departure_date.getDate())
 										}
 										onClick={() => {
-											setDatas({ ...initData, region: datas.region });
+											setDatas({
+												...initData,
+												region: datas.region,
+												city: datas.city,
+											});
 											setStage(TripStage.WHEN_MONTH);
 										}}
 									/>
@@ -81,6 +100,7 @@ const Container: FC<PropsType> = ({
 										setDatas({
 											...initData,
 											region: datas.region,
+											city: datas.city,
 											month: datas.month,
 											departure_date: datas.departure_date,
 										});
@@ -95,6 +115,7 @@ const Container: FC<PropsType> = ({
 										setDatas({
 											...initData,
 											region: datas.region,
+											city: datas.city,
 											month: datas.month,
 											departure_date: datas.departure_date,
 											duration: datas.duration,
@@ -114,6 +135,7 @@ const Container: FC<PropsType> = ({
 										setDatas({
 											...initData,
 											region: datas.region,
+											city: datas.city,
 											month: datas.month,
 											departure_date: datas.departure_date,
 											duration: datas.duration,
@@ -126,39 +148,39 @@ const Container: FC<PropsType> = ({
 						</div>
 					</div>
 					<div className="flex flex-row gap-x-3 px-5">
-						<div className="w-1/5 h-2 rounded-xl overflow-hidden bg-whiteCover">
+						<div className="h-2 w-1/5 overflow-hidden rounded-xl bg-whiteCover">
 							<div
 								className={`${
-									stage > TripStage.MAP ? "w-full" : "w-0"
-								} h-full transition-all duration-500 bg-yellowText`}
+									stage > TripStage.WHERE_CITY ? "w-full" : "w-0"
+								} h-full bg-yellowText transition-all duration-500`}
 							></div>
 						</div>
-						<div className="w-1/5 h-2 rounded-xl overflow-hidden bg-whiteCover">
+						<div className="h-2 w-1/5 overflow-hidden rounded-xl bg-whiteCover">
 							<div
 								className={`${
 									stage > TripStage.WHEN_CALENDAR ? "w-full" : "w-0"
-								} h-full transition-all duration-500 bg-yellowText`}
+								} h-full bg-yellowText transition-all duration-500`}
 							></div>
 						</div>
-						<div className="w-1/5 h-2 rounded-xl overflow-hidden bg-whiteCover">
+						<div className="h-2 w-1/5 overflow-hidden rounded-xl bg-whiteCover">
 							<div
 								className={`${
 									stage > TripStage.DURATION ? "w-full" : "w-0"
-								} h-full transition-all duration-500 bg-yellowText`}
+								} h-full bg-yellowText transition-all duration-500`}
 							></div>
 						</div>
-						<div className="w-1/5 h-2 rounded-xl overflow-hidden bg-whiteCover">
+						<div className="h-2 w-1/5 overflow-hidden rounded-xl bg-whiteCover">
 							<div
 								className={`${
 									stage > TripStage.WHO ? "w-full" : "w-0"
-								} h-full transition-all duration-500 bg-yellowText`}
+								} h-full bg-yellowText transition-all duration-500`}
 							></div>
 						</div>
-						<div className="w-1/5 h-2 rounded-xl overflow-hidden bg-whiteCover">
+						<div className="h-2 w-1/5 overflow-hidden rounded-xl bg-whiteCover">
 							<div
 								className={`${
 									stage > TripStage.INTERESTS ? "w-full" : "w-0"
-								} h-full transition-all duration-500 bg-yellowText`}
+								} h-full bg-yellowText transition-all duration-500`}
 							></div>
 						</div>
 					</div>

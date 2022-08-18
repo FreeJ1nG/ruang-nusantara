@@ -3,6 +3,7 @@ import { FC, ReactNode, useState } from "react";
 
 import AddonsForm from "$components/trips/AddonsForm";
 import CalendarForm from "$components/trips/CalendarForm";
+import CityForm from "$components/trips/CityForm";
 import Container from "$components/trips/Container";
 import DurationForm from "$components/trips/DurationForm";
 import InterestsForm from "$components/trips/InterestsForm";
@@ -10,6 +11,7 @@ import LandingCard from "$components/trips/LandingCard";
 import MapCard from "$components/trips/MapCard";
 import MonthForm from "$components/trips/MonthForm";
 import TravelWithForm from "$components/trips/TravelWithForm";
+import TripSummaryPage from "$components/trips/summary";
 
 const Trips: FC = () => {
 	const [stage, setStage] = useState<TripStage>(TripStage.HOMEPAGE);
@@ -38,6 +40,13 @@ const Trips: FC = () => {
 			break;
 		case TripStage.MAP:
 			component = <MapCard {...props} />;
+			break;
+		case TripStage.WHERE_CITY:
+			component = (
+				<Container {...props}>
+					<CityForm {...props} />
+				</Container>
+			);
 			break;
 		case TripStage.WHEN_MONTH:
 			component = (
@@ -84,7 +93,7 @@ const Trips: FC = () => {
 		case TripStage.CHECKOUT:
 			component = (
 				<Container {...props}>
-					<MonthForm {...props} />
+					<TripSummaryPage />
 				</Container>
 			);
 			break;
