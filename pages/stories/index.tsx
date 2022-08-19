@@ -40,6 +40,7 @@ const NewsCard: FC<{
 					src={imageSrc}
 					alt={title}
 					layout="fill"
+					objectFit="cover"
 					className="rounded-md"
 				/>
 			</button>
@@ -245,7 +246,6 @@ const Stories: FC = () => {
 				/>
 			</div>
 			<div className="flex flex-col gap-y-10 py-10">
-				<div className="h-80"></div>
 				<div ref={staycationRef} className="pt-8">
 					<NewsSection genre={NewsGenre.STAYCATION} />
 				</div>
