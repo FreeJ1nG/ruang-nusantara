@@ -9,7 +9,7 @@ const MapCard: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 	const [filter, setFilter] = useState<string>("");
 
 	return (
-		<div className="my-10 flex flex-col gap-y-10">
+		<div className="flex h-[calc(100vh-80px)] min-h-full flex-col justify-center gap-y-10">
 			<div className="flex w-full justify-center">
 				<div className="flex w-[300px] flex-row justify-center rounded-xl shadow-lg sm:w-[400px]">
 					<input

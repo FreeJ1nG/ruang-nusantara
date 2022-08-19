@@ -11,7 +11,6 @@ import LandingCard from "$components/trips/LandingCard";
 import MapCard from "$components/trips/MapCard";
 import MonthForm from "$components/trips/MonthForm";
 import TravelWithForm from "$components/trips/TravelWithForm";
-import TripSummaryPage from "$components/trips/summary";
 
 const Trips: FC = () => {
 	const [stage, setStage] = useState<TripStage>(TripStage.HOMEPAGE);
@@ -93,7 +92,7 @@ const Trips: FC = () => {
 		case TripStage.CHECKOUT:
 			component = (
 				<Container {...props}>
-					<TripSummaryPage />
+					<CityForm {...props} />
 				</Container>
 			);
 			break;
