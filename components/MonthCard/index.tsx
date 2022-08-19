@@ -22,13 +22,13 @@ const MonthCard: FC<MonthCardProps> = ({
 	return (
 		<button
 			onClick={() => onClick()}
-			className="bg-white hover:bg-greenHover/30 transition-all duration-300 p-8 rounded-xl border-2 border-gray7 flex flex-col gap-y-5 items-center justify-center"
+			className="z-80 flex flex-col items-center justify-center gap-y-5 rounded-xl border-2 border-gray7 bg-white p-8 transition-all duration-300 hover:bg-greenHover/30"
 		>
-			<div className="text-3xl font-medium font-ubuntu text-center">
+			<div className="text-center font-ubuntu text-3xl font-medium">
 				{month}
 			</div>
-			<div className="text-base text-defaultText text-center">{recommend}</div>
-			<div className="flex flex-row gap-x-4 items-center">
+			<div className="text-center text-base text-defaultText">{recommend}</div>
+			<div className="flex flex-row items-center gap-x-4">
 				<Image src="/sun.png" alt="sun" width={30} height={30} />
 				{`${lowestTemp}℃/${highestTemp}℃`}
 			</div>

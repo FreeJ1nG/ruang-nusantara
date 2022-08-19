@@ -36,13 +36,13 @@ const InterestCard: FC<{
 						}
 					}
 				}}
-				className="group relative p-5 py-10 flex flex-col gap-y-4 justify-center items-center w-72"
+				className="group relative flex w-72 flex-col items-center justify-center gap-y-4 p-5 py-10"
 			>
-				<div className="absolute top-0 bottom-0 left-0 right-0 transition-all duration-300 group-disabled:bg-white/50 z-80"></div>
-				<div className="relative w-60 h-60">
+				<div className="absolute top-0 bottom-0 left-0 right-0 z-80 transition-all duration-300 group-disabled:bg-white/50"></div>
+				<div className="relative h-60 w-60">
 					<Image src={imageSrc} alt={title} layout="fill" />
 				</div>
-				<div className="font-medium text-2xl">{title}</div>
+				<div className="text-2xl font-medium">{title}</div>
 			</button>
 		</CardContainer>
 	);
@@ -53,13 +53,13 @@ const InterestsForm: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 	const [chosen, setChosen] = useState<Interests[]>([]);
 
 	return (
-		<div className="flex flex-col gap-y-14 items-center">
-			<h1 className="text-2xl font-medium">
+		<div className="flex flex-col items-center gap-y-14">
+			<h1 className="text-center text-lg font-semibold sm:text-left md:text-xl lg:text-2xl xl:text-3xl">
 				{indo
 					? "Apakah aktivitas yang Anda suka?"
 					: "What do you like to see and do?"}
 			</h1>
-			<div className="grid gap-5 grid-rows-6 grid-cols-1 sm:grid-rows-3 sm:grid-cols-2 lg:grid-rows-2 lg:grid-cols-3 justify-center">
+			<div className="grid grid-cols-1 grid-rows-6 justify-center gap-5 sm:grid-cols-2 sm:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2">
 				{INTEREST_CARDS.map((interestCard) => (
 					<InterestCard
 						key={interestCard.id}

@@ -28,9 +28,9 @@ const AddonCard: FC<{
 						setChosen([...chosen, addon]);
 					}
 				}}
-				className="px-2 py-10 flex flex-col gap-y-4 justify-center items-center w-60"
+				className="flex w-60 flex-col items-center justify-center gap-y-4 px-2 py-10"
 			>
-				<div className="relative w-40 h-40">
+				<div className="relative h-40 w-40">
 					<Image
 						src={imageSrc}
 						alt={addon}
@@ -39,7 +39,7 @@ const AddonCard: FC<{
 						layout="fill"
 					/>
 				</div>
-				<div className="font-medium text-2xl text-center">{addon}</div>
+				<div className="text-center text-2xl font-medium">{addon}</div>
 			</button>
 		</CardContainer>
 	);
@@ -50,13 +50,13 @@ const AddonsForm: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 	const [chosen, setChosen] = useState<Addons[]>([]);
 
 	return (
-		<div className="flex flex-col gap-y-14 items-center">
-			<h1 className="text-2xl font-medium text-center">
+		<div className="flex flex-col items-center gap-y-14">
+			<h1 className="text-center text-lg font-semibold sm:text-left md:text-xl lg:text-2xl xl:text-3xl">
 				{indo
 					? "Apakah ada servis tambahan yang Anda butuhkan?"
 					: "Is there any extra services you need?"}
 			</h1>
-			<div className="grid grid-rows-4 grid-cols-1 sm:grid-rows-2 sm:grid-cols-2 xl:grid-rows-1 xl:grid-cols-4 gap-5 justify-center">
+			<div className="grid grid-cols-1 grid-rows-4 justify-center gap-5 sm:grid-cols-2 sm:grid-rows-2 xl:grid-cols-4 xl:grid-rows-1">
 				{ADDON_CARDS.map((addonCard) => (
 					<AddonCard
 						key={addonCard.id}

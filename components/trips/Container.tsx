@@ -40,7 +40,7 @@ const Container: FC<PropsType> = ({
 		<div className="flex w-full justify-center">
 			<div className="my-10 flex w-full flex-col gap-y-12">
 				<div className="flex w-full flex-col gap-y-12 px-5 sm:px-10 md:px-20 lg:px-40 xl:px-80 2xl:px-96">
-					<div className="flex w-full flex-col gap-y-2 px-10">
+					<div className="flex w-full flex-col gap-y-2 px-5 sm:px-10">
 						<h1 className="text-base font-medium">PLANNING YOUR TRIP TO</h1>
 						<div className="flex flex-row gap-x-5 overflow-auto">
 							{datas?.region && stage === TripStage.WHERE_CITY && (
@@ -147,7 +147,7 @@ const Container: FC<PropsType> = ({
 							)}
 						</div>
 					</div>
-					<div className="flex flex-row gap-x-3 px-5">
+					<div className="flex flex-row gap-x-3 px-2 sm:px-5">
 						<div className="h-2 w-1/5 overflow-hidden rounded-xl bg-whiteCover">
 							<div
 								className={`${

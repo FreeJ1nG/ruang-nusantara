@@ -27,18 +27,18 @@ const DurationCard: FC<{
 						setChosen(id);
 					}
 				}}
-				className="p-5 py-10 flex flex-col gap-y-4 justify-center items-center w-72"
+				className="flex w-72 flex-col items-center justify-center gap-y-4 p-5 py-10"
 			>
-				<div className="relative w-48 h-48">
+				<div className="relative h-48 w-48">
 					<Image src={imageSrc} alt={`${from}-${to} days`} layout="fill" />
 				</div>
-				<div className="font-medium text-2xl">{`${from}-${to} days`}</div>
-				<div className="flex flex-row gap-x-4 items-center">
-					<div className="flex flex-col text-footerText text-sm">
+				<div className="text-2xl font-medium">{`${from}-${to} days`}</div>
+				<div className="flex flex-row items-center gap-x-4">
+					<div className="flex flex-col text-sm text-footerText">
 						<h1 className="text-xs">START</h1>
 						<h1 className="text-xs">FROM</h1>
 					</div>
-					<h1 className="text-startFrom text-2xl">${start_from}</h1>
+					<h1 className="text-2xl text-startFrom">${start_from}</h1>
 				</div>
 			</button>
 		</CardContainer>
@@ -50,13 +50,13 @@ const DurationForm: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 	const [chosen, setChosen] = useState<number>(-1);
 
 	return (
-		<div className="flex flex-col gap-y-14 items-center">
-			<h1 className="text-2xl font-medium">
+		<div className="flex flex-col items-center gap-y-14">
+			<h1 className="text-center text-lg font-semibold sm:text-left md:text-xl lg:text-2xl xl:text-3xl">
 				{indo
 					? "Seberapa lama liburan Anda?"
 					: "What's the duration of your holiday?"}
 			</h1>
-			<div className="flex flex-row flex-wrap gap-5 justify-center">
+			<div className="flex flex-row flex-wrap justify-center gap-5">
 				{DURATION_CARDS.map((durationCard) => (
 					<DurationCard
 						key={durationCard.id}

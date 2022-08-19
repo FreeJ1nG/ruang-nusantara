@@ -45,7 +45,9 @@ const CityCard: FC<{
 					className="rounded-tl-md rounded-tr-md"
 				/>
 			</div>
-			<div className="w-full p-4 text-center">{title}</div>
+			<div className="w-full rounded-bl-md rounded-br-md bg-white p-4 text-center">
+				{title}
+			</div>
 		</button>
 	);
 };
@@ -54,24 +56,34 @@ const CityForm: FC<PropsType> = ({ setStage, stage, datas, setDatas }) => {
 	const indo = useContext(IndoContext);
 
 	return (
-		<div className="flex w-[300px] flex-col items-center gap-y-14 md:w-[500px] xl:w-[1000px]">
-			<h1 className="text-2xl font-medium">
-				{indo
-					? "Kemanakan tujuan yang menarik bagi Anda?"
-					: "Where would you like to visit?"}
-			</h1>
-			<div className="grid w-full grid-cols-1 grid-rows-4 gap-5 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-4 xl:grid-rows-1">
-				{CITIES.filter((city) => city.region === datas.region).map((city) => (
-					<CityCard
-						key={city.id}
-						{...city}
-						setStage={setStage}
-						datas={datas}
-						setDatas={setDatas}
-					/>
-				))}
+		<>
+			<div className="absolute bottom-0 left-0">
+				<div className="relative h-[200px] w-[300px] sm:h-[275px] sm:w-[400px] xl:h-[400px] xl:w-[600px]"></div>
+				<Image
+					src="/trips/cityformbg.png"
+					alt="City Form Background"
+					layout="fill"
+				/>
 			</div>
-		</div>
+			<div className="flex w-[300px] flex-col items-center gap-y-14 pb-10 md:w-[500px] xl:w-[1000px]">
+				<h1 className="text-center text-lg font-semibold sm:text-left md:text-xl lg:text-2xl xl:text-3xl">
+					{indo
+						? "Kemanakan tujuan yang menarik bagi Anda?"
+						: "Where would you like to visit?"}
+				</h1>
+				<div className="grid w-full grid-cols-1 grid-rows-4 gap-5 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-4 xl:grid-rows-1">
+					{CITIES.filter((city) => city.region === datas.region).map((city) => (
+						<CityCard
+							key={city.id}
+							{...city}
+							setStage={setStage}
+							datas={datas}
+							setDatas={setDatas}
+						/>
+					))}
+				</div>
+			</div>
+		</>
 	);
 };
 

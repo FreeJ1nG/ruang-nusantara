@@ -27,12 +27,12 @@ const TravelTypeCard: FC<{
 						setChosen(type);
 					}
 				}}
-				className="px-2 py-10 flex flex-col gap-y-4 justify-center items-center w-72"
+				className="flex w-72 flex-col items-center justify-center gap-y-4 px-2 py-10"
 			>
-				<div className="relative w-60 h-60">
+				<div className="relative h-60 w-60">
 					<Image src={imageSrc} alt={type} layout="fill" />
 				</div>
-				<div className="font-medium text-2xl">{type}</div>
+				<div className="text-2xl font-medium">{type}</div>
 			</button>
 		</CardContainer>
 	);
@@ -48,11 +48,11 @@ const TravelWithForm: FC<PropsType> = ({
 	const [chosen, setChosen] = useState<TravelType | null>(null);
 
 	return (
-		<div className="flex flex-col gap-y-14 items-center">
-			<h1 className="text-2xl font-medium">
+		<div className="flex flex-col items-center gap-y-14">
+			<h1 className="text-center text-lg font-semibold sm:text-left md:text-xl lg:text-2xl xl:text-3xl">
 				{indo ? "Dengan siapakah Anda pergi?" : "Who is travelling with you?"}
 			</h1>
-			<div className="flex flex-row flex-wrap gap-5 justify-center">
+			<div className="flex flex-row flex-wrap justify-center gap-5">
 				{TRAVEL_TYPE_CARDS.map((travelTypeCard) => (
 					<TravelTypeCard
 						key={travelTypeCard.id}
