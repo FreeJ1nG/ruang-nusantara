@@ -113,7 +113,7 @@ const DestinationsCard: FC = () => {
 							<div className="text-left text-3xl font-bold drop-shadow-xl">
 								{title}
 							</div>
-							<div className="text-left tracking-widest drop-shadow-xl">
+							<div className="text-left text-sm tracking-widest drop-shadow-xl">
 								{description}
 							</div>
 							<div className="h-8" />

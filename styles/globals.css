@@ -86,7 +86,7 @@ img {
 .bigcard .carousel .control-arrow,
 .bigcard .carousel.carousel-slider .control-arrow:hover {
 	opacity: 1;
-	background-color: rgba(165, 104, 49, 0.7);
+	background-color: rgba(165, 104, 49, 0.5);
 }
 
 .bigcard .carousel .control-next {
