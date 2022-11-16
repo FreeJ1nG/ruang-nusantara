@@ -153,8 +153,8 @@ const Content: FC<PropTypes> = ({ indo }) => {
           </div>
         </div>
       </div>
-      <div className="relative flex flex-col px-2 py-14 sm:px-20 md:px-32 lg:px-20 xl:px-32 2xl:px-60">
-        <div className="mt-10 flex flex-row flex-wrap justify-center gap-5 xl:gap-x-10">
+      <div className="relative flex flex-col px-2 py-8 sm:px-20 md:px-32 lg:px-20 xl:px-32 2xl:px-60">
+        <div className="flex flex-row flex-wrap justify-center gap-5 xl:gap-x-10">
           {INTERESTS_CARDS.map((interest) => (
             <CardWithImage
               key={interest.id}
